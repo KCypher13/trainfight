@@ -1,0 +1,9 @@
+{
+	"routes" : [
+		{"path" : "/", "view" : "chat"}
+	],
+	"socket" : true,
+	"events": [
+		{"listener": "send", "method": "messages::publish"}
+	]
+}

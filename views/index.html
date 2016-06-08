@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>TrainFight</title>
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="static/styles.css">
 
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
@@ -15,20 +15,50 @@
 
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="" alt="Retour à l'accueil">Home</a>
+        </nav>
+    </header>
     <section id="connexion">
-        pseudo<input type="text" id="pseudo"><br>
-        room name<input type="text" id="roomName"><br>
-        <button id="createRoom">Créer la room</button>
+        <h1>Trainfight</h1>
+        <p>Ici le texte descriptif rapide de cette super application qu’on va tous adorer ! Lorem ipsum sit dolor amet</p>
+        <h2>Créer une room</h2>
+        <form>
+            <label for="roomName">Le nom de la room</label>
+            <input type="text" id="roomName" placeholder="Entrez le nom de la room"/>
+            <label for="pseudo">Votre pseudo</label>
+            <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
+            <button id="createRoom" disabled>Créer la room</button>
+        </form>
     </section>
     <section id="waitingRoom" class="hide">
         <div class="playersList">
-            <h3>Controller</h3>
+            <h2>Joueurs dans la room</h2>
+            <h3>Le contrôleur</h3>
             <span id="manager"></span>
-            <h3>Perturbateurs</h3>
+            <h3>Le(s) perturbateur(s)</h3>
             <ul id="disruptors"></ul>
+            <div id="waitingPlayers">
+                <p>en attente de joueurs</p>
+            </div>
+            <button id="startGame">Commencer</button>
         </div>
-        <button id="startGame">Commencer</button>
-        <button class="shareLink">Partager le lien</button>
+        <div class="inviteToPlay">
+            <h3>Inviter à joueur</h3>
+            <button class="shareLink">Partager le lien</button>
+        </div>        
+    </section>
+    <section id="rejoinRoom" class="hide">
+        <h2>Rejoindre la room</h2>
+        <div class="playersList">
+            <h3>Les joueurs présents</h3>
+            <ul class="playersOnline">
+            </ul>
+            <label for="pseudo">Votre pseudo</label>
+            <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
+            <button id="joinGame">Rejoindre</button>
+        </div>
     </section>
     <section id="game" class="hide">
         <div class="station" data-id="chatelet">Chatelet</div>

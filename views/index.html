@@ -63,7 +63,7 @@
             <button id="joinGame">Rejoindre</button>
         </div>
     </section>
-    <section id="game" class="hide">
+    <section id="game" class="">
         <!--Header map-->
         <div class="mapInformations">
             <div class="satisfactionRate">
@@ -76,8 +76,15 @@
         </div>
         <!--Map-->
         <div id="mapGame">
-            <div class="station" data-id="chatelet">Chatelet</div>
-            <div class="station" data-id="nation">Nation</div>
+            <div id="chatelet" class="station mdl-button mdl-js-button mdl-button--icon" data-id="chatelet">Chatelet</div>
+            <div id="nation" class="station mdl-button mdl-js-button mdl-button--icon" data-id="nation">Nation</div>
+            <!--MENU-->
+            <ul id="actionMenu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                for="test">
+              <li class="mdl-menu__item">Action 1</li>
+              <li class="mdl-menu__item">Action 2</li>
+              <li disabled class="mdl-menu__item">Action 3</li>
+            </ul>
         </div>  
     </section>
 </body>

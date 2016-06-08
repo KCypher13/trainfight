@@ -16,6 +16,8 @@ function createRoom(){
 
 function sendAction(){
     var _station = $(this).data('id');
+    $('#actionMenu').attr('for',_station).css('clip', 'auto');
+    $('.mdl-menu__container.is-upgraded').addClass('is-visible');
     socket.emit('createAction', {'station': _station, 'action': "greveSNCF"});
 }
 

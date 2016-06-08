@@ -4,8 +4,8 @@ function createRoom(){
     user.room = $('#roomName').val();
     user.pseudo = $('#pseudo').val();
 
-	socket.emit('joinRoom', user.room);
     socket.emit('changePseudo', user.pseudo);
+	socket.emit('joinRoom', user.room);
     $('#connexion').addClass('hide');
     $('#waitingRoom').removeClass('hide');
 

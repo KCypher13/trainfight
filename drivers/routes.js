@@ -8,7 +8,7 @@ module.exports = function(app){
 				});
 			}
 			
-			appExpress.use(express.static(app.root + '/public'));
+			appExpress.use('/static', express.static(app.root + '/public'));
 		}
 	}
 }

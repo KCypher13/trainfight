@@ -7,7 +7,11 @@ function createRoom(){
 	socket.emit('joinRoom', user.room);
     socket.emit('changePseudo', user.pseudo);
     $('#connexion').addClass('hide');
-    $('#game').removeClass('hide');
+    $('#waitingRoom').removeClass('hide');
+
+    var stateObj = { page: "waitingRoom" };
+    history.pushState(stateObj, "Room"+user.room, "#"+user.room);
+
 }
 
 function sendAction(){
@@ -15,11 +19,22 @@ function sendAction(){
     socket.emit('createAction', {'station': _station, 'action': "greveSNCF"});
 }
 
+
+
 $(function(){
 
 	$('#createRoom').click(createRoom);
     $('.station').click(sendAction);
+
+    new Clipboard('.shareLink', {
+        text: function(trigger) {
+            return location.href;
+        }
+    });
+
 });
+
+
 
 socket.on('newAction', function(data){
     alert (data.user+' a lancé '+ data.action +' à '+data.station);

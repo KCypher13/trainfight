@@ -1,22 +1,14 @@
 var socket = io();
 
-function sendMessage(){
-	var _v = $('input').val();
-	socket.emit('send', _v);
-	$('input').val("");
+function createRoom(){
+    user.room = $('#room').val();
+    user.pseudo = $('#pseudo').val();
+	socket.emit('joinRoom', user.room);
+    socket.emit('changePseudo', user.pseudo)
 }
 
 $(function(){
-	$('button').click(sendMessage)
+
+	$('#createRoom').click(createRoom);
 });
 
-document.addEventListener('keyup', function(ev){
-	if(ev.keyCode == 13){
-		sendMessage();
-	}
-});
-
-
-socket.on('receiveMsg', function(msg){
-	$('ul').prepend('<li>'+msg+'</li>');
-});

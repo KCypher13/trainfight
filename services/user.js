@@ -5,7 +5,7 @@ module.exports = function(app){
         },
         joinRoom: function(data){
             this.join(data);
-
+            this.activeRoom = data;
             if(app.socket.io.sockets.adapter.rooms[data].length > 1){
                 this.manager = false;
             }

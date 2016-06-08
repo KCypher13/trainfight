@@ -20,3 +20,7 @@ $(function(){
 	$('#createRoom').click(createRoom);
     $('.station').click(sendAction);
 });
+
+socket.on('newAction', function(data){
+    alert (data.user+' a lancé '+ data.action +' à '+data.station);
+});

@@ -5,6 +5,7 @@
 	"socket" : true,
 	"events": [
 		{"listener": "changePseudo", "method": "user::setPseudo"},
-		{"listener": "joinRoom", "method": "user::joinRoom"}
+		{"listener": "joinRoom", "method": "user::joinRoom"},
+        {"listener": "createAction", "method": "room::createAction"}
 	]
 }

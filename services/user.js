@@ -5,6 +5,14 @@ module.exports = function(app){
         },
         joinRoom: function(data){
             this.join(data);
+
+            if(app.socket.io.sockets.adapter.rooms[data].length > 1){
+                this.manager = false;
+            }
+            else{
+                this.manager = true;
+            }
+
         }
     }
 };

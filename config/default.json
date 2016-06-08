@@ -1,9 +1,10 @@
 {
 	"routes" : [
-		{"path" : "/", "view" : "chat"}
+		{"path" : "/", "view" : "index"}
 	],
 	"socket" : true,
 	"events": [
-		{"listener": "send", "method": "messages::publish"}
+		{"listener": "changePseudo", "method": "user::setPseudo"},
+		{"listener": "joinRoom", "method": "user::joinRoom"}
 	]
 }

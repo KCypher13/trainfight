@@ -13,8 +13,8 @@ module.exports = function(app){
 
 				for(key in app.config.events){
 					var _socketEvent = app.config.events[key];
-					var _service 	= _socketEvent.method.split('::')[0]
-					var _method 	= _socketEvent.method.split('::')[1]
+					var _service 	= _socketEvent.method.split('::')[0];
+					var _method 	= _socketEvent.method.split('::')[1];
 					socket.on(_socketEvent.listener, app[_service][_method]);
 				}
 			});

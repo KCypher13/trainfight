@@ -3,17 +3,26 @@
 <head>
 	<meta charset="UTF-8">
 	<title>TrainFight</title>
+
+    <link rel="stylesheet" href="styles.css">
+
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
 	<script src="main.js"></script>
     <script src="user.js"></script>
+
 </head>
 <body>
-
-    pseudo<input type="text" id="pseudo"><br>
-    room name<input type="text" id="roomName"><br>
-    <button id="createRoom">Créer la room</button>
+    <section id="connexion">
+        pseudo<input type="text" id="pseudo"><br>
+        room name<input type="text" id="roomName"><br>
+        <button id="createRoom">Créer la room</button>
+    </section>
+    <section id="game" class="hide">
+        <div class="station" data-id="chatelet">Chatelet</div>
+        <div class="station" data-id="nation">Nation</div>
+    </section>
 
 </body>
 </html>

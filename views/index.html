@@ -10,8 +10,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
-	<script src="/static/main.js"></script>
     <script src="/static/user.js"></script>
+    <script src="/static/room.js"></script>
+    <script src="/static/main.js"></script>
 
 </head>
 <body>
@@ -27,8 +28,16 @@
             <h3>Perturbateurs</h3>
             <ul id="disruptors"></ul>
         </div>
-        <button id="startGame">Commencer</button>
-        <button class="shareLink">Partager le lien</button>
+        <div id="launcher" class="hide">
+            <button id="startGame">Commencer</button>
+            <button class="shareLink">Partager le lien</button>
+        </div>
+        <div id="joiner" class="hide">
+            pseudo<input type="text" id="pseudo"><br>
+            <button id="joinGame">Rejoindre</button>
+        </div>
+
+
     </section>
     <section id="game" class="hide">
         <div class="station" data-id="chatelet">Chatelet</div>

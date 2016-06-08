@@ -1,7 +1,7 @@
-var user = function(){
-
-    return {
-        name:null,
-        room:null
+var user = {
+    name: null,
+    changePseudo: function (pseudo) {
+        this.pseudo = pseudo;
+        socket.emit('changePseudo', this.pseudo);
     }
 };

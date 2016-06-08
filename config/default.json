@@ -1,6 +1,6 @@
 {
 	"routes" : [
-		{"path" : "/", "view" : "index"}
+		{"path" : "*", "view" : "index"}
 	],
 	"socket" : true,
 	"events": [

@@ -10,7 +10,7 @@ function createRoom(){
     $('#waitingRoom').removeClass('hide');
 
     var stateObj = { page: "waitingRoom" };
-    history.pushState(stateObj, "Room"+user.room, "#"+user.room);
+    history.pushState(stateObj, "Room"+user.room, "/room/"+user.room);
 
 }
 

@@ -78,11 +78,27 @@ p i.material-icons{
     width: 100%;
     height: 100vh;
     /*background: url('img/map.png') no-repeat top left;*/
-    background: url('img/map.png') no-repeat center center; 
+    /*background: url('img/map.png') no-repeat center center;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
-      background-size: cover;
+      background-size: cover;*/
+    position: relative;
+    overflow: scroll;
+}
+#map{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    zoom: 0.5;
+    z-index: 10;
+}
+#rerB{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    zoom: 0.5;
+    z-index: 20;
 }
 .mapInformations{
     z-index: 0;

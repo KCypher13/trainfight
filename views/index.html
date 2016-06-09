@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TrainFight</title>
 
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
@@ -19,118 +20,122 @@
 
 </head>
 <body>
-<header>
-    <nav>
-        <a href="" alt="Retour à l'accueil">Home</a>
-    </nav>
-</header>
-<section id="connexion">
-    <h1>Trainfight</h1>
-    <p>Ici le texte descriptif rapide de cette super application qu’on va tous adorer ! Lorem ipsum sit dolor amet</p>
-    <h2>Créer une room</h2>
-    <form>
-        <label for="roomName">Le nom de la room</label>
-        <input type="text" id="roomName" placeholder="Entrez le nom de la room"/>
-        <label for="pseudo">Votre pseudo</label>
-        <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
-        <button id="createRoom" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Créer la room</button>
-    </form>
-</section>
-<section id="waitingRoom" class="hide">
-    <div class="playersList">
-        <h2>Joueurs dans la room</h2>
-        <h3>Le contrôleur</h3>
-        <ul class="demo-list-action mdl-list">
-            <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-avatar">person</i>
-                        <span class="manager"></span>
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                        picto
-                    </span>
-            </li>
-        </ul>
-        <h3>Le(s) perturbateur(s)</h3>
-        <ul class="disruptors" class="demo-list-action mdl-list">
-            <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-avatar">person</i>
-                        <span>Nom du joueur</span>
-                    </span>
-            </li>
-        </ul>
-    </div>
-    <div id="waitingPlayers">
-        <p>en attente de joueurs</p>
-    </div>
-    <div id="launcher" class="hide">
-        <button id="startGame">Commencer</button>
-        <div class="inviteToPlay">
-            <h3>Inviter à joueur</h3>
-            <button class="shareLink">Partager le lien</button>
-        </div>
-    </div>
+    <div class="mdl-grid">
+        <div class="mdl-cell--12-col mdl-cell--4-col-phone">
+            <header>
+                <nav>
+                    <a href="" alt="Retour à l'accueil">Home</a>
+                </nav>
+            </header>
+            <section id="connexion">
+                <h1>Trainfight</h1>
+                <p>Ici le texte descriptif rapide de cette super application qu’on va tous adorer ! Lorem ipsum sit dolor amet</p>
+                <h2>Créer une room</h2>
+                <form>
+                    <label for="roomName">Le nom de la room</label>
+                    <input type="text" id="roomName" placeholder="Entrez le nom de la room"/>
+                    <label for="pseudo">Votre pseudo</label>
+                    <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
+                    <button id="createRoom" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Créer la room</button>
+                </form>
+            </section>
+            <section id="waitingRoom" class="hide">
+                <div class="playersList">
+                    <h2>Joueurs dans la room</h2>
+                    <h3>Le contrôleur</h3>
+                    <ul class="demo-list-action mdl-list">
+                        <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-avatar">person</i>
+                                    <span class="manager"></span>
+                                </span>
+                                <span class="mdl-list__item-secondary-action">
+                                    picto
+                                </span>
+                        </li>
+                    </ul>
+                    <h3>Le(s) perturbateur(s)</h3>
+                    <ul class="disruptors" class="demo-list-action mdl-list">
+                        <li class="mdl-list__item">
+                                <span class="mdl-list__item-primary-content">
+                                    <i class="material-icons mdl-list__item-avatar">person</i>
+                                    <span>Nom du joueur</span>
+                                </span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="waitingPlayers">
+                    <p>en attente de joueurs</p>
+                </div>
+                <div id="launcher" class="hide">
+                    <button id="startGame">Commencer</button>
+                    <div class="inviteToPlay">
+                        <h3>Inviter à joueur</h3>
+                        <button class="shareLink">Partager le lien</button>
+                    </div>
+                </div>
 
-    <div id="joiner" class="hide">
-        <label for="pseudo">Votre pseudo</label>
-        <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
-        <button id="joinGame">Rejoindre</button>
-    </div>
+                <div id="joiner" class="hide">
+                    <label for="pseudo">Votre pseudo</label>
+                    <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
+                    <button id="joinGame">Rejoindre</button>
+                </div>
 
-</section>
-<section id="game" class="hide">
-    <!--Header map-->
-    <div class="mapInformations">
-        <div class="satisfactionRate">
-            <p>Taux de satisfaction</p>
-            <div id="p1" class="mdl-progress mdl-js-progress"></div>
-        </div>
-        <div class="userInformations">
-            <p>Nombre <span id="typeInformationUser">X</span> : <span id="valueInformationUser">X</span></p>
-        </div>
-    </div>
-    <!--Map-->
-    <div id="mapGame">
-        <!--MapElements-->
-        <div class="mapLine">
+            </section>
+            <section id="game" class="hide">
+                <!--Header map-->
+                <div class="mapInformations">
+                    <div class="satisfactionRate">
+                        <p>Taux de satisfaction</p>
+                        <div id="p1" class="mdl-progress mdl-js-progress"></div>
+                    </div>
+                    <div class="userInformations">
+                        <p>Nombre <span id="typeInformationUser">X</span> : <span id="valueInformationUser">X</span></p>
+                    </div>
+                </div>
+                <!--Map-->
+                <div id="mapGame">
+                    <!--MapElements-->
+                    <div class="mapLine">
 
+                    </div>
+                    <!--ActionsMapMenu-->
+                    <ul id="actionMenu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                        for="test">
+                        <li class="mdl-menu__item">Action 1</li>
+                        <li class="mdl-menu__item">Action 2</li>
+                        <li disabled class="mdl-menu__item">Action 3</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="scoreEndGame" class="hide">
+                <h2>Partie terminée !</h2>
+                <p>lorem ipsum sit dolor amet</p>
+                <div class="playersList">
+                    <h3>Le contrôleur</h3>
+                    <ul class="demo-list-action mdl-list">
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-avatar">person</i>
+                                <span class="manager"></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                picto
+                            </span>
+                        </li>
+                    </ul>
+                    <h3>Le(s) perturbateur(s)</h3>
+                    <ul class="disruptors" class="demo-list-action mdl-list">
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-avatar">person</i>
+                                <span>Nom du joueur</span>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </section>
         </div>
-        <!--ActionsMapMenu-->
-        <ul id="actionMenu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-            for="test">
-            <li class="mdl-menu__item">Action 1</li>
-            <li class="mdl-menu__item">Action 2</li>
-            <li disabled class="mdl-menu__item">Action 3</li>
-        </ul>
     </div>
-</section>
-<section id="scoreEndGame" class="hide">
-    <h2>Partie terminée !</h2>
-    <p>lorem ipsum sit dolor amet</p>
-    <div class="playersList">
-        <h3>Le contrôleur</h3>
-        <ul class="demo-list-action mdl-list">
-            <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-avatar">person</i>
-                        <span class="manager"></span>
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                        picto
-                    </span>
-            </li>
-        </ul>
-        <h3>Le(s) perturbateur(s)</h3>
-        <ul class="disruptors" class="demo-list-action mdl-list">
-            <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-avatar">person</i>
-                        <span>Nom du joueur</span>
-                    </span>
-            </li>
-        </ul>
-    </div>
-</section>
 </body>
 </html>

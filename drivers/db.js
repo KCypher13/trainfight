@@ -69,7 +69,7 @@ module.exports = function (app) {
                 async.forEachOf(rows, function (value, key, callback) {
                     app.db.connector.query('SELECT actionId FROM actionReaction WHERE reactionId = ?', value.id, function(err, rows, fields){
                         reactions[value.id] = value;
-                        var _actions = []
+                        var _actions = [];
                         for(key in rows){
                             _actions.push(rows[key].actionId)
                         }
@@ -83,6 +83,14 @@ module.exports = function (app) {
                 });
 
 
+            });
+        },
+        getReaction: function(reactionId, cb){
+            this.connector.query('SELECT * FROM reaction WHERE id = ?', reactionId, function (err, rows, fields) {
+                if (err) throw err;
+                if(cb){
+                    cb(rows[0]);
+                }
             });
         },
         getAction: function (actionId, cb) {

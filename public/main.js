@@ -32,6 +32,23 @@ function sendAction() {
     socket.emit('createAction', {'station': _station, 'action': _action});
 }
 
+function sendReaction(){
+    var _station = $(this).parent().attr('for');
+    var _reaction = room.reactions[$(this).data('id')];
+    if(!_reaction.asRecovery){
+        var _nbAgent = prompt('combien d\'agent à envoyer ?');
+        if(_nbAgent > user.availableAgent){
+            alert('Vous n\'avez pas assez d\'agents');
+        }
+        else{
+            socket.emit('createReaction', {'station': _station, 'reaction': _reaction, 'nbAgents': _nbAgent});
+        }
+    }
+    else{
+
+    }
+}
+
 function openMenu(){
     var _station = $(this).data('id');
     var _actionId = $(this).data('actions');
@@ -77,7 +94,7 @@ function generateManagerMenu(stationId){
             var _reaction = room.reactions[key];
 
             if(_reaction.actions.indexOf(room.actionInProgress[stationId].action.id) >-1){
-                _html += '<li class="mdl-menu__item action" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+                _html += '<li class="mdl-menu__item reaction" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
             }
         }
 
@@ -102,6 +119,7 @@ $(function () {
     $('#joinGame').click(setPseudo);
     $('#startGame').click(startGame);
     $('body').on('click', '.action', sendAction);
+    $('body').on('click', '.reaction', sendReaction);
 
 
     new Clipboard('.shareLink', {
@@ -156,4 +174,8 @@ socket.on('changeSatisfaction', function(data){
 
 socket.on('role', function(data){
     user.role = data;
+});
+
+socket.on('notification', function(message){
+    alert(message);
 });

@@ -77,5 +77,22 @@ p i.material-icons{
 #mapGame{
     width: 100%;
     height: 100vh;
-    background: url('img/map.png') no-repeat top left;
+    /*background: url('img/map.png') no-repeat top left;*/
+    background: url('img/map.png') no-repeat center center; 
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+}
+.mapInformations{
+    z-index: 0;
+    padding: 10px;
+    background-color: #ccc;
+}
+.mapInformations p{
+    margin-bottom: 5px;
+}
+#progressBar{
+    height: 20px;
+    margin-bottom: 15px;
 }

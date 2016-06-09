@@ -27,10 +27,13 @@ function createRoom(e) {
 }
 
 function sendAction() {
+    socket.emit('createAction', {'station': _station, 'action': "greveSNCF"});
+}
+
+function openMenu(){
     var _station = $(this).data('id');
     $('#actionMenu').attr('for',_station).css('clip', 'auto');
     $('.mdl-menu__container.is-upgraded').addClass('is-visible');
-    socket.emit('createAction', {'station': _station, 'action': "greveSNCF"});
 }
 
 function setPseudo(){
@@ -44,7 +47,7 @@ function startGame(){
 $(function () {
     checkUrl();
     $('#createRoom').click(createRoom);
-    $('.station').click(sendAction);
+    $('body').on('click', '.station', openMenu);
     $('#joinGame').click(setPseudo);
     $('#startGame').click(startGame);
 

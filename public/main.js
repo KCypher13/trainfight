@@ -69,6 +69,8 @@ socket.on('playersList', function (data) {
 });
 
 socket.on('generateLine', function(data){
-
+    $('#waitingRoom').removeClass('hide');
     $('#game').removeClass('hide');
+    room.generateStation(data);
+
 });

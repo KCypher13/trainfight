@@ -4,11 +4,14 @@
 	<meta charset="UTF-8">
 	<title>TrainFight</title>
 
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="static/styles.css">
 
 	<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.10/clipboard.min.js"></script>
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 
     <script src="/static/user.js"></script>
     <script src="/static/room.js"></script>
@@ -16,33 +19,150 @@
 
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="" alt="Retour à l'accueil">Home</a>
+        </nav>
+    </header>
     <section id="connexion">
-        pseudo<input type="text" id="pseudo"><br>
-        room name<input type="text" id="roomName"><br>
-        <button id="createRoom">Créer la room</button>
+        <h1>Trainfight</h1>
+        <p>Ici le texte descriptif rapide de cette super application qu’on va tous adorer ! Lorem ipsum sit dolor amet</p>
+        <h2>Créer une room</h2>
+        <form>
+            <label for="roomName">Le nom de la room</label>
+            <input type="text" id="roomName" placeholder="Entrez le nom de la room"/>
+            <label for="pseudo">Votre pseudo</label>
+            <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
+            <button id="createRoom" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Créer la room</button>
+        </form>
     </section>
     <section id="waitingRoom" class="hide">
         <div class="playersList">
-            <h3>Controller</h3>
-            <span id="manager"></span>
-            <h3>Perturbateurs</h3>
-            <ul id="disruptors"></ul>
-        </div>
-        <div id="launcher" class="hide">
+            <h2>Joueurs dans la room</h2>
+            <h3>Le contrôleur</h3>
+            <ul class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span id="manager"></span>
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                        picto
+                    </span>  
+                </li>
+            </ul>
+            <h3>Le(s) perturbateur(s)</h3>
+            <ul id="disruptors" class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span>Nom du joueur</span>
+                    </span>
+                </li>
+            </ul>
+            <div id="waitingPlayers">
+                <p>en attente de joueurs</p>
+            </div>
             <button id="startGame">Commencer</button>
-            <button class="shareLink">Partager le lien</button>
         </div>
-        <div id="joiner" class="hide">
-            pseudo<input type="text" id="pseudo"><br>
+        <div class="inviteToPlay">
+            <h3>Inviter à joueur</h3>
+            <button class="shareLink">Partager le lien</button>
+        </div>        
+    </section>
+    <section id="rejoinRoom" class="hide">
+        <h2>Rejoindre la room</h2>
+        <div class="playersList">
+            <h3>Les joueurs présents</h3>
+            <h3>Le contrôleur</h3>
+            <ul class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span id="manager"></span>
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                        picto
+                    </span>  
+                </li>
+            </ul>
+            <h3>Le(s) perturbateur(s)</h3>
+            <ul id="disruptors" class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span>Nom du joueur</span>
+                    </span>
+                </li>
+            </ul>
+            <label for="pseudo">Votre pseudo</label>
+            <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
             <button id="joinGame">Rejoindre</button>
         </div>
-
-
     </section>
     <section id="game" class="hide">
-        <div class="station" data-id="chatelet">Chatelet</div>
-        <div class="station" data-id="nation">Nation</div>
+        <!--Header map-->
+        <div class="mapInformations">
+            <div class="satisfactionRate">
+                <p>Taux de satisfaction</p>
+                <div id="p1" class="mdl-progress mdl-js-progress"></div>
+            </div>
+            <div class="userInformations">
+                <p>Nombre <span id="typeInformationUser">X</span> : <span id="valueInformationUser">X</span></p>
+            </div>
+        </div>
+        <!--Map-->
+        <div id="mapGame">
+            <!--MapElements-->
+            <div class="mapLine">
+                <div id="chatelet" class="station mdl-button mdl-js-button mdl-button--icon" data-id="chatelet">
+                    <div class="markerProgress hide">
+                        <p>80%</p>
+                    </div>
+                    <p>Chatelet</p>
+                </div>
+                <div id="nation" class="station mdl-button mdl-js-button mdl-button--icon" data-id="nation">
+                    <div class="markerProgress hide">
+                        <p>80%</p>
+                    </div>
+                    <p>Nation</p>
+                </div>
+            </div>
+            <!--ActionsMapMenu-->
+            <ul id="actionMenu" class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
+                for="test">
+              <li class="mdl-menu__item">Action 1</li>
+              <li class="mdl-menu__item">Action 2</li>
+              <li disabled class="mdl-menu__item">Action 3</li>
+            </ul>
+        </div>  
     </section>
-
+    <section id="scoreEndGame" class="hide">
+        <h2>Partie terminée !</h2>
+        <p>lorem ipsum sit dolor amet</p>
+        <div class="playersList">
+            <h3>Le contrôleur</h3>
+            <ul class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span id="manager"></span>
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                        picto
+                    </span>  
+                </li>
+            </ul>
+            <h3>Le(s) perturbateur(s)</h3>
+            <ul id="disruptors" class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span>Nom du joueur</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </section>
 </body>
 </html>

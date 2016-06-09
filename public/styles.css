@@ -86,19 +86,20 @@ p i.material-icons{
     position: relative;
     overflow: scroll;
 }
-#map{
+.map{
     width: 100%;
     height: 100%;
     position: absolute;
-    zoom: 0.5;
+    zoom: 0.7;
+}
+#mapBackground {
     z-index: 10;
 }
 #rerB{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    zoom: 0.5;
     z-index: 20;
+}
+#rerB{
+    z-index: 30;
 }
 .mapInformations{
     z-index: 0;
@@ -111,4 +112,12 @@ p i.material-icons{
 #progressBar{
     height: 20px;
     margin-bottom: 15px;
+}
+
+@media screen and (max-width: 960px)
+{
+    /* Rédigez vos propriétés CSS ici */
+    .map{
+        zoom: 0.5;
+    }
 }

@@ -10,6 +10,7 @@ module.exports = function(app){
 
                 _room.disruptors[this.id] = ({pseudo: this.pseudo, socketId: this.id, actionPoint: 10});
                 app.socket.io.to(this.activeRoom).emit('playersList', {manager:_room.manager.pseudo, disruptors: _room.disruptors});
+                this.emit('role', 'disruptor');
             }
             else if (!_room) {
                 this.pseudo = data;
@@ -33,6 +34,7 @@ module.exports = function(app){
                 app.socket.io.sockets.adapter.rooms[data].manager = {pseudo: this.pseudo, socketId: this.id};
                 app.socket.io.sockets.adapter.rooms[data].disruptors = {};
                 this.emit('playersList', {manager: this.pseudo, disruptors: {}});
+                this.emit('role', 'manager');
             }
         }
     }

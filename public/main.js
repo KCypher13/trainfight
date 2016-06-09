@@ -35,23 +35,56 @@ function sendAction() {
 function openMenu(){
     var _station = $(this).data('id');
     var _actionId = $(this).data('actions');
+
+
+    if(user.role == 'disruptor'){
+        generateDisruptorMenu(_actionId, _station);
+    }
+    else{
+        generateManagerMenu(_station);
+    }
+
+    $('#actionMenu').attr('for',_station).css('clip', 'auto');
+    $('.mdl-menu__container.is-upgraded').addClass('is-visible');
+}
+
+function generateDisruptorMenu(actionId, stationId){
     var _html = "";
     var _actionMenu = $('#actionMenu');
-    if(_actionId){
-        if(_actionId.length>1){
+    if(room.actionInProgress[stationId]){
+        _html += "operation en cours";
+    }
+    else if(actionId){
+        if(actionId.length>1){
             var _actionsArray = _actionId.split(',');
             for(key in _actionsArray){
                 _html += '<li class="mdl-menu__item action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
             }
         }
         else{
-           _html += '<li class="mdl-menu__item action" data-id="'+_actionId+'">'+room.actions[_actionId].name+'</li>';
+            _html += '<li class="mdl-menu__item action" data-id="'+actionId+'">'+room.actions[actionId].name+'</li>';
         }
 
         _actionMenu.html(_html);
     }
-    _actionMenu.attr('for',_station).css('clip', 'auto');
-    $('.mdl-menu__container.is-upgraded').addClass('is-visible');
+}
+
+function generateManagerMenu(stationId){
+    var _html = "";
+    var _actionMenu = $('#actionMenu');
+    if(room.actionInProgress[stationId]){
+        for(key in room.reactions){
+            var _reaction = room.reactions[key];
+
+            if(_reaction.actions.indexOf(room.actionInProgress[stationId].action.id) >-1){
+                _html += '<li class="mdl-menu__item action" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+            }
+        }
+
+    }else{
+        _html += "tout vas bien";
+    }
+    _actionMenu.html(_html);
 }
 
 function setPseudo(){
@@ -81,7 +114,7 @@ $(function () {
 
 
 socket.on('newAction', function (data) {
-    //alert(data.user + ' a lancé ' + data.action + ' à ' + data.station);
+    room.actionInProgress[data.station.id] = data;
 });
 
 socket.on('playersList', function (data) {
@@ -119,4 +152,8 @@ socket.on('changeAvailableAgent',function(data){
 
 socket.on('changeSatisfaction', function(data){
    room.setSatisfaction(data);
+});
+
+socket.on('role', function(data){
+    user.role = data;
 });

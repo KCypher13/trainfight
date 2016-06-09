@@ -14,11 +14,11 @@ module.exports = function (app) {
                    if(action.cost <= _disruptor.actionPoint){
                        _disruptor.actionPoint = _disruptor.actionPoint-action.cost;
                        app.socket.io.sockets.connected[_disruptor.socketId].emit('changeActionPoint', _disruptor.actionPoint);
-                       _activeRoom.actionInProgress.push({station: station.name, action: action.name, user: _socket.pseudo, gravity: action.gravity, visitors:(station.annualVisitors/365)/24});
+                       _activeRoom.actionInProgress.push({station: station, action: action, user: _socket, gravity: action.gravity, visitors:(station.annualVisitors/365)/24});
 
                        app.socket.io.to(_socket.activeRoom).emit('newAction', {
-                           station: station.name,
-                           action: action.name,
+                           station: station,
+                           action: action,
                            user: _socket.pseudo
                        });
                    }

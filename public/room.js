@@ -3,6 +3,8 @@ var room = {
     manager: null,
     disruptors: null,
     actions : {},
+    reactions :{},
+    actionInProgress:{},
     joinRoom: function (roomName) {
         this.name = roomName;
         socket.emit('joinRoom', this.name);

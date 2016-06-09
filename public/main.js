@@ -38,11 +38,11 @@ function openMenu(){
         if(_actionId.length>1){
             var _actionsArray = _actionId.split(',');
             for(key in _actionsArray){
-                _html += '<li class="mdl-menu__item">'+room.actions[_actionsArray[key]].name+'</li>';
+                _html += '<li class="mdl-menu__item action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
             }
         }
         else{
-           _html += '<li class="mdl-menu__item">'+room.actions[_actionId].name+'</li>';
+           _html += '<li class="mdl-menu__item action" data-id="'+_actionId+'">'+room.actions[_actionId].name+'</li>';
         }
 
         $('#actionMenu').html(_html);
@@ -65,6 +65,7 @@ $(function () {
     $('body').on('click', '.station', openMenu);
     $('#joinGame').click(setPseudo);
     $('#startGame').click(startGame);
+    $('.action').click(sendAction);
 
 
     new Clipboard('.shareLink', {

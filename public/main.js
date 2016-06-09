@@ -32,6 +32,21 @@ function sendAction() {
 
 function openMenu(){
     var _station = $(this).data('id');
+    var _actionId = $(this).data('actions');
+    var _html = "";
+    if(_actionId){
+        if(_actionId.length>1){
+            var _actionsArray = _actionId.split(',');
+            for(key in _actionsArray){
+                _html += '<li class="mdl-menu__item">'+room.actions[_actionsArray[key]].name+'</li>';
+            }
+        }
+        else{
+           _html += '<li class="mdl-menu__item">'+room.actions[_actionId].name+'</li>';
+        }
+
+        $('#actionMenu').html(_html);
+    }
     $('#actionMenu').attr('for',_station).css('clip', 'auto');
     $('.mdl-menu__container.is-upgraded').addClass('is-visible');
 }

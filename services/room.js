@@ -36,6 +36,9 @@ module.exports = function (app) {
             app.db.getActions(function(actions){
                 app.socket.io.to(socket.activeRoom).emit('hydrateActions', actions);
             });
+            app.db.getReactions(function(reactions){
+                app.socket.io.sockets.connected[app.socket.io.sockets.adapter.rooms[socket.activeRoom].manager.socketId].emit('hydrateReaction', reactions);
+            });
             app.room.initialisePoint(socket.activeRoom);
 
         },

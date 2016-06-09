@@ -59,7 +59,31 @@ module.exports = function (app) {
                 if (cb) {
                     cb(actions);
                 }
-            })
+            });
+        },
+        getReactions: function(cb){
+            this.connector.query('SELECT * FROM reaction', function (err, rows, fields) {
+                if (err) throw err;
+                var reactions = {};
+
+                async.forEachOf(rows, function (value, key, callback) {
+                    app.db.connector.query('SELECT actionId FROM actionReaction WHERE reactionId = ?', value.id, function(err, rows, fields){
+                        reactions[value.id] = value;
+                        var _actions = []
+                        for(key in rows){
+                            _actions.push(rows[key].actionId)
+                        }
+                        reactions[value.id].actions = _actions;
+                        callback();
+                    });
+                },function(err){
+                    if (cb) {
+                        cb(reactions);
+                    }
+                });
+
+
+            });
         },
         getAction: function (actionId, cb) {
             this.connector.query('SELECT * FROM action WHERE id = ?', actionId, function (err, rows, fields) {
@@ -77,6 +101,7 @@ module.exports = function (app) {
                 }
             });
         }
+
     }
 
 };

@@ -100,6 +100,10 @@ socket.on('hydrateActions', function(actions){
     room.actions = actions;
 });
 
+socket.on('hydrateReaction', function(reactions){
+    room.reactions = reactions
+});
+
 socket.on('initisalisePoint', function(data){
     room.setSatisfaction(data.satisfaction);
     room.startTime = data.startTime;

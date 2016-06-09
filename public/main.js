@@ -75,5 +75,8 @@ socket.on('generateLine', function(data){
     $('#waitingRoom').removeClass('hide');
     $('#game').removeClass('hide');
     room.generateStation(data);
+});
 
+socket.on('hydrateActions', function(actions){
+    room.actions = actions;
 });

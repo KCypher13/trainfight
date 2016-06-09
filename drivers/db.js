@@ -34,6 +34,7 @@ module.exports = function (app) {
             var stationsWithActions = {};
             async.forEachOf(stations, function (value, key, callback) {
                 app.db.connector.query('SELECT actionId FROM stationAction WHERE stationId = ?', value.id, function (err, rows, fields) {
+                    if (err) throw err;
                     var refactedRows = [];
                     for(key in rows){
                         refactedRows.push(rows[key].actionId);
@@ -47,6 +48,18 @@ module.exports = function (app) {
                     cb(stationsWithActions);
                 }
             });
+        },
+        getActions : function(cb){
+            this.connector.query('SELECT * FROM action', function(err, rows, fields){
+                if (err) throw err;
+                var actions = {};
+                for(key in rows){
+                    actions[rows[key].id] = rows[key];
+                }
+                if(cb){
+                    cb(actions);
+                }
+            })
         }
     }
 

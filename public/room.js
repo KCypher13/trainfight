@@ -2,6 +2,7 @@ var room = {
     name: null,
     manager: null,
     disruptors: null,
+    actions : {},
     joinRoom: function (roomName) {
         this.name = roomName;
         socket.emit('joinRoom', this.name);

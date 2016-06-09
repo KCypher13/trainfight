@@ -14,7 +14,9 @@ module.exports = function (app) {
                 app.db.getStationsFromLines(lines, function (data) {
                     app.socket.io.to(socket.activeRoom).emit('generateLine', data);
                 });
-
+            });
+            app.db.getActions(function(actions){
+                app.socket.io.to(socket.activeRoom).emit('hydrateActions', actions);
             });
         }
     }

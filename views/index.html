@@ -32,16 +32,33 @@
             <input type="text" id="roomName" placeholder="Entrez le nom de la room"/>
             <label for="pseudo">Votre pseudo</label>
             <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
-            <button id="createRoom" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" disabled>Créer la room</button>
+            <button id="createRoom" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Créer la room</button>
         </form>
     </section>
     <section id="waitingRoom" class="hide">
         <div class="playersList">
             <h2>Joueurs dans la room</h2>
             <h3>Le contrôleur</h3>
-            <span id="manager"></span>
+            <ul class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span id="manager"></span>
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                        picto
+                    </span>  
+                </li>
+            </ul>
             <h3>Le(s) perturbateur(s)</h3>
-            <ul id="disruptors"></ul>
+            <ul id="disruptors" class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span>Nom du joueur</span>
+                    </span>
+                </li>
+            </ul>
             <div id="waitingPlayers">
                 <p>en attente de joueurs</p>
             </div>
@@ -56,7 +73,26 @@
         <h2>Rejoindre la room</h2>
         <div class="playersList">
             <h3>Les joueurs présents</h3>
-            <ul class="playersOnline">
+            <h3>Le contrôleur</h3>
+            <ul class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span id="manager"></span>
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                        picto
+                    </span>  
+                </li>
+            </ul>
+            <h3>Le(s) perturbateur(s)</h3>
+            <ul id="disruptors" class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span>Nom du joueur</span>
+                    </span>
+                </li>
             </ul>
             <label for="pseudo">Votre pseudo</label>
             <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
@@ -99,6 +135,33 @@
               <li disabled class="mdl-menu__item">Action 3</li>
             </ul>
         </div>  
+    </section>
+    <section id="scoreEndGame" class="hide">
+        <h2>Partie terminée !</h2>
+        <p>lorem ipsum sit dolor amet</p>
+        <div class="playersList">
+            <h3>Le contrôleur</h3>
+            <ul class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span id="manager"></span>
+                    </span>
+                    <span class="mdl-list__item-secondary-action">
+                        picto
+                    </span>  
+                </li>
+            </ul>
+            <h3>Le(s) perturbateur(s)</h3>
+            <ul id="disruptors" class="demo-list-action mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-avatar">person</i>
+                        <span>Nom du joueur</span>
+                    </span>
+                </li>
+            </ul>
+        </div>
     </section>
 </body>
 </html>

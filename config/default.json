@@ -1,4 +1,10 @@
 {
+    "db": {
+      "host": "localhost",
+      "user": "root",
+      "password": "",
+      "database": "trainfight"
+    },
 	"routes" : [
 		{"path" : "*", "view" : "index"}
 	],

@@ -12,6 +12,8 @@
 	"events": [
 		{"listener": "changePseudo", "method": "user::setPseudo"},
 		{"listener": "joinRoom", "method": "user::joinRoom"},
-        {"listener": "createAction", "method": "room::createAction"}
+        {"listener": "createAction", "method": "room::createAction"},
+        {"listener": "startGame", "method": "room::startGame"}
+
 	]
 }

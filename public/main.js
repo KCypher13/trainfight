@@ -32,12 +32,16 @@ function setPseudo(){
     user.changePseudo($('#waitingRoom #pseudo').val());
 }
 
+function startGame(){
+    socket.emit('startGame');
+}
 
 $(function () {
     checkUrl();
     $('#createRoom').click(createRoom);
     $('.station').click(sendAction);
     $('#joinGame').click(setPseudo);
+    $('#startGame').click(startGame);
 
 
     new Clipboard('.shareLink', {

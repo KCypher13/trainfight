@@ -1,6 +1,59 @@
+/*-------------------------------
+== COMMON
+-------------------------------*/
+/* helpers class */
 .hide{
     display:none
 }
+/* titles and buttons */
+h1, h2{
+    text-align: center;
+    text-transform: uppercase;
+}
+h2{
+    font-size: 1.5em;
+}
+h3{
+    font-size: 1.250em;
+}
+button.mdl-button{
+    display: block;
+    margin: 25px auto 15px;
+}
+
+/*-------------------------------
+== HEADER
+-------------------------------*/
+header{
+    background-color: #00AA90;
+    padding: 2%;
+    color: #fff;
+}
+header a{
+    text-decoration: none;
+    color: #fff;
+}
+
+/*-------------------------------
+== #CONNEXION (homepage)
+-------------------------------*/
+h1{
+    font-size: 1.750em;
+}
+form input, form label{
+    display: block;
+    width: 90%;
+    padding: 10px 5px;
+}
+form input{
+    border: 3px solid #95989A;
+}
+form label{
+    margin-bottom: 0px;
+}
+/*-------------------------------
+== #GAME (map)
+-------------------------------*/
 #mapGame{
     width: 100%;
     height: 100vh;

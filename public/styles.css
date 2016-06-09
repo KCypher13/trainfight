@@ -6,13 +6,11 @@
     display:none
 }
 /* titles */
-h1, h2{
+h2{
     margin-bottom: 0;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
-}
-h2{
     font-size: 1.5em;
 }
 h3{
@@ -54,7 +52,9 @@ header a{
 == #CONNEXION (homepage)
 -------------------------------*/
 h1{
-    font-size: 1.750em;
+    height: 80px;
+    background: url('img/logo_train_fight.svg') center no-repeat;
+    font-size: 0;
 }
 
 /*-------------------------------

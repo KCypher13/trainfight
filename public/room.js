@@ -10,9 +10,10 @@ var room = {
         //history.pushState(stateObj, "Room" + this.name, "/room/" + this.name);
     },
     generatePlayerlist: function(){
+
         $('.manager').text(this.manager);
         for(key in this.disruptors){
-            $('.disruptors').append('<li>'+this.disruptors[key]+'</li>')
+            $('.disruptors').append('<li>'+this.disruptors[key].pseudo+'</li>')
         }
     },
     generateStation: function(lines){
@@ -43,6 +44,9 @@ var room = {
             }
         }
         $('.mapLine').html(_html);
-
+    },
+    setSatisfaction: function(satisfaction){
+        this.satisfaction = satisfaction;
+        $('.satisfaction').text(satisfaction);
     }
 };

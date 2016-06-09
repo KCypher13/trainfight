@@ -99,3 +99,16 @@ socket.on('generateLine', function(data){
 socket.on('hydrateActions', function(actions){
     room.actions = actions;
 });
+
+socket.on('initisalisePoint', function(data){
+    room.setSatisfaction(data.satisfaction);
+    room.startTime = data.startTime;
+});
+
+socket.on('changeActionPoint', function(data){
+   user.setActionPoint(data);
+});
+
+socket.on('changeAvailableAgent',function(data){
+    user.setAvailableAgent(data);
+});

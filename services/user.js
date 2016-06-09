@@ -6,10 +6,9 @@ module.exports = function(app){
 
 
             if (_room && _room.disruptors.indexOf(this.pseudo) == -1) {
-
                 this.pseudo = data;
-                _room.disruptors.push(this.pseudo);
-                app.socket.io.to(this.activeRoom).emit('playersList', {manager:_room.manager, disruptors: _room.disruptors});
+                _room.disruptors.push({pseudo: this.pseudo, socketId: this.id, actionPoint: 10});
+                app.socket.io.to(this.activeRoom).emit('playersList', {manager:_room.manager.pseudo, disruptors: _room.disruptors});
             }
             else if (!_room) {
                 this.pseudo = data;
@@ -26,11 +25,11 @@ module.exports = function(app){
             this.activeRoom = data;
             if(app.socket.io.sockets.adapter.rooms[data].length > 1){
                 this.manager = false;
-                app.socket.io.to(data).emit('playersList', {manager:app.socket.io.sockets.adapter.rooms[data].manager, disruptors: app.socket.io.sockets.adapter.rooms[data].disruptors})
+                app.socket.io.to(data).emit('playersList', {manager:app.socket.io.sockets.adapter.rooms[data].manager.pseudo, disruptors: app.socket.io.sockets.adapter.rooms[data].disruptors})
             }
             else{
                 this.manager = true;
-                app.socket.io.sockets.adapter.rooms[data].manager = this.pseudo;
+                app.socket.io.sockets.adapter.rooms[data].manager = {pseudo: this.pseudo, socketId: this.id};
                 app.socket.io.sockets.adapter.rooms[data].disruptors = [];
                 this.emit('playersList', {manager: this.pseudo, disruptors: []});
             }

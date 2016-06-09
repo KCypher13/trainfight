@@ -81,7 +81,7 @@ $(function () {
 
 
 socket.on('newAction', function (data) {
-    alert(data.user + ' a lancé ' + data.action + ' à ' + data.station);
+    //alert(data.user + ' a lancé ' + data.action + ' à ' + data.station);
 });
 
 socket.on('playersList', function (data) {
@@ -111,4 +111,8 @@ socket.on('changeActionPoint', function(data){
 
 socket.on('changeAvailableAgent',function(data){
     user.setAvailableAgent(data);
+});
+
+socket.on('changeSatisfaction', function(data){
+   room.setSatisfaction(data);
 });

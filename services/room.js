@@ -3,13 +3,25 @@ module.exports = function (app) {
         createAction: function (data) {
             //TODO function checking if enough point
             var _socket = this;
+            var _activeRoomName = _socket.activeRoom;
+            var _activeRoom = app.socket.io.sockets.adapter.rooms[_activeRoomName];
+            var _disruptor = _activeRoom.disruptors[_socket.id];
+
+
             app.db.getStation(data.station, function(station){
                app.db.getAction(data.action, function(action){
-                   app.socket.io.to(_socket.activeRoom).emit('newAction', {
-                       station: station.name,
-                       action: action.name,
-                       user: _socket.pseudo
-                   });
+
+                   if(action.cost <= _disruptor.actionPoint){
+                       _disruptor.actionPoint = _disruptor.actionPoint-action.cost;
+                       app.socket.io.sockets.connected[_disruptor.socketId].emit('changeActionPoint', _disruptor.actionPoint);
+                       _activeRoom.actionInProgress.push({station: station.name, action: action.name, user: _socket.pseudo, gravity: action.gravity, visitors:(station.annualVisitors/365)/24});
+
+                       app.socket.io.to(_socket.activeRoom).emit('newAction', {
+                           station: station.name,
+                           action: action.name,
+                           user: _socket.pseudo
+                       });
+                   }
                })
             });
 
@@ -32,6 +44,7 @@ module.exports = function (app) {
             _activeRoom.satisfaction = 10000;
             _activeRoom.manager.availableAgent = _activeRoom.disruptors.length*5;
             _activeRoom.startTime = Date.now();
+            _activeRoom.actionInProgress = [];
 
             app.socket.io.to(activeRoomName).emit('initisalisePoint', {satisfaction : _activeRoom.satisfaction, startTime : _activeRoom.startTime});
 
@@ -41,6 +54,17 @@ module.exports = function (app) {
             }
 
             app.socket.io.sockets.connected[_activeRoom.manager.socketId].emit('changeAvailableAgent', _activeRoom.manager.availableAgent);
+            _activeRoom.satisfactionChecker = setInterval(function(){app.room.satisfactionChecker(activeRoomName)}, 1000);
+
+        },
+        satisfactionChecker: function(activeRoomName){
+            var _activeRoom = app.socket.io.sockets.adapter.rooms[activeRoomName];
+            var _actionsInProgress = _activeRoom.actionInProgress;
+            for(key in _actionsInProgress){
+                var _action =_actionsInProgress[key];
+                _activeRoom.satisfaction = _activeRoom.satisfaction-(_action.visitors/3);
+            }
+            app.socket.io.to(activeRoomName).emit('changeSatisfaction', _activeRoom.satisfaction);
         }
 
     }

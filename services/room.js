@@ -9,9 +9,10 @@ module.exports = function (app) {
             });
         },
         startGame: function (data) {
+            var socket = this;
             app.db.getLines(function (lines) {
                 app.db.getStationsFromLines(lines, function (data) {
-                    app.socket.io.to(this.activeRoom).emit('generateLine', data);
+                    app.socket.io.to(socket.activeRoom).emit('generateLine', data);
                 });
 
             });

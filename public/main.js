@@ -13,7 +13,10 @@ function checkUrl() {
 }
 
 
-function createRoom() {
+function createRoom(e) {
+    if(e){
+        e.preventDefault();
+    }
     user.changePseudo($('#connexion #pseudo').val());
     room.joinRoom($('#roomName').val());
 
@@ -63,4 +66,9 @@ socket.on('playersList', function (data) {
     room.manager = data.manager;
     room.disruptors = data.disruptors;
     room.generatePlayerlist();
+});
+
+socket.on('generateLine', function(data){
+
+    $('#game').removeClass('hide');
 });

@@ -21,7 +21,7 @@
 </head>
 <body>
     <div class="mdl-grid">
-        <div class="mdl-cell--12-col mdl-cell--4-col-phone">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
             <header>
                 <a href="" alt="Retour à l'accueil">Home</a>
             </header>
@@ -43,42 +43,42 @@
                     <h3>Le contrôleur</h3>
                     <ul class="demo-list-action mdl-list">
                         <li class="mdl-list__item">
-                                <span class="mdl-list__item-primary-content">
-                                    <i class="material-icons mdl-list__item-avatar">person</i>
-                                    <span class="manager"></span>
-                                </span>
-                                <span class="mdl-list__item-secondary-action">
-                                    picto
-                                </span>
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-avatar">person</i>
+                                <span class="manager"></span>
+                            </span>
+                            <span class="mdl-list__item-secondary-action">
+                                picto
+                            </span>
                         </li>
                     </ul>
                     <h3>Le(s) perturbateur(s)</h3>
                     <ul class="disruptors" class="demo-list-action mdl-list">
                         <li class="mdl-list__item">
-                                <span class="mdl-list__item-primary-content">
-                                    <i class="material-icons mdl-list__item-avatar">person</i>
-                                    <span>Nom du joueur</span>
-                                </span>
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-avatar">person</i>
+                                <span>Nom du joueur</span>
+                            </span>
                         </li>
                     </ul>
                 </div>
                 <div id="waitingPlayers">
-                    <p>en attente de joueurs</p>
+                    <p>En attente de joueurs</p>
+                    <p><i class="material-icons">restore</i></p>
                 </div>
                 <div id="launcher" class="hide">
-                    <button id="startGame">Commencer</button>
+                    <button id="startGame" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Commencer</button>
                     <div class="inviteToPlay">
-                        <h3>Inviter à joueur</h3>
-                        <button class="shareLink">Partager le lien</button>
+                        <h2>Inviter à jouer</h2>
+                        <button class="shareLink mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Partager le lien</button>
                     </div>
                 </div>
-
                 <div id="joiner" class="hide">
+                    <h2>Rejoindre la room</h2>
                     <label for="pseudo">Votre pseudo</label>
                     <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
-                    <button id="joinGame">Rejoindre</button>
+                    <button id="joinGame" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">Rejoindre</button>
                 </div>
-
             </section>
             <section id="game" class="hide">
                 <!--Header map-->

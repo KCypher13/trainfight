@@ -5,20 +5,36 @@
 .hide{
     display:none
 }
-/* titles and buttons */
+/* titles */
 h1, h2{
+    margin-bottom: 0;
     text-align: center;
     text-transform: uppercase;
+    font-weight: bold;
 }
 h2{
     font-size: 1.5em;
 }
 h3{
+    margin-bottom: 0;
     font-size: 1.250em;
+    font-weight: bold;
 }
+/* action's elements */
 button.mdl-button{
     display: block;
     margin: 25px auto 15px;
+}
+input, label{
+    display: block;
+    width: 90%;
+    padding: 10px 5px;
+}
+input{
+    border: 3px solid #95989A;
+}
+label{
+    margin-bottom: 0px;
 }
 
 /*-------------------------------
@@ -40,16 +56,20 @@ header a{
 h1{
     font-size: 1.750em;
 }
-form input, form label{
-    display: block;
-    width: 90%;
-    padding: 10px 5px;
+
+/*-------------------------------
+== #WAITING ROOM (create room)
+-------------------------------*/
+ul.demo-list-action, ul{
+    margin: 0;
+    padding: 0;
 }
-form input{
-    border: 3px solid #95989A;
+#waitingPlayers{
+    text-align: center;
 }
-form label{
-    margin-bottom: 0px;
+p i.material-icons{
+    font-size: 5em;
+    color: #00AA90;
 }
 /*-------------------------------
 == #GAME (map)

@@ -23,7 +23,7 @@ var room = {
             for(key in _stations){
                 ;
                 var _station = _stations[key];
-                _html += '<div id='+_station.name+' class="station mdl-button mdl-js-button mdl-button--icon" data-name="'+_station.name+'" data-line="'+_line.name+'" ';
+                _html += '<div id='+_station.name+' class="station mdl-button mdl-js-button mdl-button--icon" data-id="'+_station.id+'" data-name="'+_station.name+'" data-line="'+_line.name+'" ';
                 if(_station.actions.length>0){
                     _html += 'data-actions="';
                     for(key in _station.actions){

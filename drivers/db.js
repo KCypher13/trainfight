@@ -18,7 +18,7 @@ module.exports = function (app) {
                     lineWithStations[value.id].name = value.name;
                     app.db.connector.query('SELECT s.* FROM `line` as l LEFT JOIN `lineStation` AS ls ON l.id = ls.lineId LEFT JOIN `station` AS s ON ls.stationId = s.id WHERE l.id = ?;', value.id, function (err, rows, fields) {
                         if (err) throw err;
-                        app.db.getActionsFromStations(rows, function(stationsWithActions){
+                        app.db.getActionsFromStations(rows, function (stationsWithActions) {
                             lineWithStations[value.id].stations = stationsWithActions;
                             callback()
                         })
@@ -36,7 +36,7 @@ module.exports = function (app) {
                 app.db.connector.query('SELECT actionId FROM stationAction WHERE stationId = ?', value.id, function (err, rows, fields) {
                     if (err) throw err;
                     var refactedRows = [];
-                    for(key in rows){
+                    for (key in rows) {
                         refactedRows.push(rows[key].actionId);
                     }
                     value.actions = refactedRows;
@@ -49,17 +49,33 @@ module.exports = function (app) {
                 }
             });
         },
-        getActions : function(cb){
-            this.connector.query('SELECT * FROM action', function(err, rows, fields){
+        getActions: function (cb) {
+            this.connector.query('SELECT * FROM action', function (err, rows, fields) {
                 if (err) throw err;
                 var actions = {};
-                for(key in rows){
+                for (key in rows) {
                     actions[rows[key].id] = rows[key];
                 }
-                if(cb){
+                if (cb) {
                     cb(actions);
                 }
             })
+        },
+        getAction: function (actionId, cb) {
+            this.connector.query('SELECT * FROM action WHERE id = ?', actionId, function (err, rows, fields) {
+                if (err) throw err;
+                if(cb){
+                    cb(rows[0]);
+                }
+            });
+        },
+        getStation: function (stationId, cb) {
+            this.connector.query('SELECT * FROM station WHERE id = ?', stationId, function (err, rows, fields) {
+                if (err) throw err;
+                if(cb){
+                    cb(rows[0]);
+                }
+            });
         }
     }
 

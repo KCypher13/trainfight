@@ -2,11 +2,17 @@ module.exports = function (app) {
     return {
         createAction: function (data) {
             //TODO function checking if enough point
-            app.socket.io.to(this.activeRoom).emit('newAction', {
-                station: data.station,
-                action: data.action,
-                user: this.pseudo
+            var _socket = this;
+            app.db.getStation(data.station, function(station){
+               app.db.getAction(data.action, function(action){
+                   app.socket.io.to(_socket.activeRoom).emit('newAction', {
+                       station: station.name,
+                       action: action.name,
+                       user: _socket.pseudo
+                   });
+               })
             });
+
         },
         startGame: function (data) {
             var socket = this;

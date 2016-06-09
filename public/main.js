@@ -27,13 +27,16 @@ function createRoom(e) {
 }
 
 function sendAction() {
-    socket.emit('createAction', {'station': _station, 'action': "greveSNCF"});
+    var _station = $(this).parent().attr('for');
+    var _action = $(this).data('id');
+    socket.emit('createAction', {'station': _station, 'action': _action});
 }
 
 function openMenu(){
     var _station = $(this).data('id');
     var _actionId = $(this).data('actions');
     var _html = "";
+    var _actionMenu = $('#actionMenu');
     if(_actionId){
         if(_actionId.length>1){
             var _actionsArray = _actionId.split(',');
@@ -45,9 +48,9 @@ function openMenu(){
            _html += '<li class="mdl-menu__item action" data-id="'+_actionId+'">'+room.actions[_actionId].name+'</li>';
         }
 
-        $('#actionMenu').html(_html);
+        _actionMenu.html(_html);
     }
-    $('#actionMenu').attr('for',_station).css('clip', 'auto');
+    _actionMenu.attr('for',_station).css('clip', 'auto');
     $('.mdl-menu__container.is-upgraded').addClass('is-visible');
 }
 
@@ -65,7 +68,7 @@ $(function () {
     $('body').on('click', '.station', openMenu);
     $('#joinGame').click(setPseudo);
     $('#startGame').click(startGame);
-    $('.action').click(sendAction);
+    $('body').on('click', '.action', sendAction);
 
 
     new Clipboard('.shareLink', {

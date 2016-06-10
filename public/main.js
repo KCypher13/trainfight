@@ -69,14 +69,14 @@ function createRoom(e) {
 }
 
 function sendAction() {
-    var _station = $(this).parent().parent().data('id');
+    var _station = $(this).parent().parent().parent().data('id');
     var _action = $(this).data('id');
     socket.emit('createAction', {'station': _station, 'action': _action});
     closeMenu();
 }
 
 function sendReaction(){
-    var _station = $(this).parent().parent().data('id');
+    var _station = $(this).parent().parent().parent().data('id');
     var _reaction = room.reactions[$(this).data('id')];
     if(!_reaction.asRecovery){
         var _nbAgent = prompt('combien d\'agent à envoyer ?');

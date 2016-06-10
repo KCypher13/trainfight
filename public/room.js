@@ -24,7 +24,6 @@ var room = {
             var _line = lines[key];
             var _stations = _line.stations;
             for(key in _stations){
-                ;
                 var _station = _stations[key];
                 _html += '<div id='+_station.name+' class="station mdl-button mdl-js-button mdl-button--icon" data-id="'+_station.id+'" data-name="'+_station.name+'" data-line="'+_line.name+'" ';
                 if(_station.actions.length>0){
@@ -39,7 +38,7 @@ var room = {
                     }
                     _html += '"';
                 }
-                _html += '>';
+                _html += ' style="top:'+_station.locationY+'px;left:'+_station.locationX+'px">';
                 _html += '<div class="markerProgress hide"><p>100%</p></div>';
                 _html += '<p>'+_station.name+'</p>';
                 _html += '</div>';

@@ -1,8 +1,123 @@
+/*-------------------------------
+== COMMON
+-------------------------------*/
+/* helpers class */
 .hide{
     display:none
 }
+/* titles */
+h2{
+    margin-bottom: 0;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+h3{
+    margin-bottom: 0;
+    font-size: 1.250em;
+    font-weight: bold;
+}
+/* action's elements */
+button.mdl-button{
+    display: block;
+    margin: 25px auto 15px;
+}
+input, label{
+    display: block;
+    width: 90%;
+    padding: 10px 5px;
+}
+input{
+    border: 3px solid #95989A;
+}
+label{
+    margin-bottom: 0px;
+}
+
+/*-------------------------------
+== HEADER
+-------------------------------*/
+header{
+    background-color: #00AA90;
+    padding: 2%;
+    color: #fff;
+}
+header a{
+    text-decoration: none;
+    color: #fff;
+}
+
+/*-------------------------------
+== #CONNEXION (homepage)
+-------------------------------*/
+h1{
+    height: 160px;
+    background: url('img/logo_train_fight.svg') center no-repeat;
+    font-size: 0;
+}
+
+/*-------------------------------
+== #WAITING ROOM (create room)
+-------------------------------*/
+ul.demo-list-action, ul{
+    margin: 0;
+    padding: 0;
+}
+#waitingPlayers{
+    text-align: center;
+}
+p i.material-icons{
+    font-size: 5em;
+    color: #00AA90;
+}
+/*-------------------------------
+== #GAME (map)
+-------------------------------*/
 #mapGame{
     width: 100%;
     height: 100vh;
-    background: url('img/map.png') no-repeat top left;
+    position: relative;
+    overflow: scroll;
+}
+.map{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    zoom: 1;
+}
+#mapBackground {
+    z-index: 10;
+}
+#rerB{
+    z-index: 20;
+}
+#rerB{
+    z-index: 30;
+}
+.mapInformations{
+    z-index: 0;
+    padding: 10px;
+    background-color: #ccc;
+}
+.mapInformations p{
+    margin-bottom: 5px;
+}
+#progressBar{
+    height: 20px;
+    margin-bottom: 15px;
+}
+
+/*-------------------------------
+== Responsive
+-------------------------------*/
+@media screen and (max-width: 960px)
+{
+
+    h1{
+        height: 80px;
+    }
+    .map{
+        zoom: 0.5;
+    }
 }

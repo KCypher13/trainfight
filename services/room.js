@@ -66,6 +66,7 @@ module.exports = function (app) {
                 app.socket.io.sockets.connected[_activeRoom.manager.socketId].emit('changeAvailableAgent', _activeRoom.manager.availableAgent);
             }
 
+            _activeRoom.disruptors[_action.user].actionPoint = _newPoint;
             app.socket.io.sockets.connected[_action.user].emit('changeActionPoint', _newPoint);
 
             delete _activeRoom.actionInProgress[station];

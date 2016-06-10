@@ -56,6 +56,8 @@ module.exports = function (app) {
                             app.room.solveAction(_activeRoom, data.station, _activeRoomName)
                         }, _resolutionTime);
                         _socket.emit('notification', 'Les agents sont en route');
+
+                        app.socket.io.to(_activeRoomName).emit('newReaction', data.station)
                     }
                 }
                 else {
@@ -66,10 +68,10 @@ module.exports = function (app) {
                         setTimeout (function(){
                             _activeRoom.manager.reactionUsed[reaction.id] = false;
                         }, reaction.recoveryTime*1000);
-
                         setTimeout(function () {
                             app.room.solveAction(_activeRoom, data.station, _activeRoomName)
                         }, _resolutionTime);
+                        app.socket.io.to(_activeRoomName).emit('newReaction', data.station)
                     }
                     else{
                         _socket.emit('notification', 'Ils sont déjà occupé ailleurs');

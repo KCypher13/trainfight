@@ -5,6 +5,7 @@ var room = {
     actions : {},
     reactions :{},
     actionInProgress:{},
+    reactionInProgress:{},
     joinRoom: function (roomName, userData) {
         var _userData = (userData)? userData : null;
         this.name = roomName;

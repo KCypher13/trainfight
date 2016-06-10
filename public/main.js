@@ -139,7 +139,10 @@ function generateDisruptorMenu(actionId, stationId){
 
 function generateManagerMenu(stationId){
     var _html = "";
-    if(room.actionInProgress[stationId]){
+    if(room.reactionInProgress[stationId]){
+        _html += "operation en cours";
+    }
+   else if(room.actionInProgress[stationId]){
         for(key in room.reactions){
             var _reaction = room.reactions[key];
 
@@ -185,8 +188,13 @@ socket.on('newAction', function (data) {
     room.actionInProgress[data.station.id] = data;
 });
 
+socket.on('newReaction', function (data) {
+    room.reactionInProgress[data] = data;
+});
+
 socket.on('actionSolved', function (data) {
     delete room.actionInProgress[data.station];
+    delete room.reactionInProgress[data.station]
 });
 
 socket.on('playersList', function (data) {

@@ -42,28 +42,50 @@ module.exports = function (app) {
             var _actionTarget = _activeRoom.actionInProgress[data.station];
 
             app.db.getReaction(data.reaction.id, function (reaction) {
+                var _resolutionTime;
+                var _gravity;
 
                 if (!reaction.asRecovery) {
                     if (_manager.availableAgent >= data.nbAgents) {
-                        var _gravity = _actionTarget.gravity;
-                        var _resolutionTime = _gravity/data.nbAgents*3000;
+                        _gravity = _actionTarget.gravity;
+                        _resolutionTime = _gravity / data.nbAgents * 3000;
                         _actionTarget.agents = data.nbAgents;
-                        _activeRoom.manager.availableAgent = _manager.availableAgent-data.nbAgents;
+                        _activeRoom.manager.availableAgent = _manager.availableAgent - data.nbAgents;
                         _socket.emit('changeAvailableAgent', _activeRoom.manager.availableAgent);
-                        setTimeout(function(){app.room.solveAction(_activeRoom, data.station, _activeRoomName)}, _resolutionTime);
+                        setTimeout(function () {
+                            app.room.solveAction(_activeRoom, data.station, _activeRoomName)
+                        }, _resolutionTime);
                         _socket.emit('notification', 'Les agents sont en route');
                     }
                 }
+                else {
+                    if(!_activeRoom.manager.reactionUsed[reaction.id]){
+                        _gravity = _actionTarget.gravity;
+                        _resolutionTime = _gravity / reaction.efficiency;
+                        _activeRoom.manager.reactionUsed[reaction.id] = true;
+                        setTimeout (function(){
+                            _activeRoom.manager.reactionUsed[reaction.id] = false;
+                        }, reaction.recoveryTime*1000);
+
+                        setTimeout(function () {
+                            app.room.solveAction(_activeRoom, data.station, _activeRoomName)
+                        }, _resolutionTime);
+                    }
+                    else{
+                        _socket.emit('notification', 'Ils sont déjà occupé ailleurs');
+                    }
+
+                }
             });
         },
-        solveAction: function(_activeRoom, station, _activeRoomName){
+        solveAction: function (_activeRoom, station, _activeRoomName) {
             var _action = _activeRoom.actionInProgress[station];
             var _dateNow = Date.now();
-            var _scoring = Math.round((_dateNow - _action.startTime)/1000);
-            var _newPoint = (Math.round((_dateNow - _action.startTime)/800)>=10) ? Math.round((_dateNow - _action.startTime)/800) : 10 ;
+            var _scoring = Math.round((_dateNow - _action.startTime) / 1000);
+            var _newPoint = (Math.round((_dateNow - _action.startTime) / 800) + parseInt(_activeRoom.disruptors[_action.user].actionPoint) >= 10) ? Math.round((_dateNow - _action.startTime)/ 800)+parseInt(_activeRoom.disruptors[_action.user].actionPoint) : 10;
 
-            if(_action.agents){
-                _activeRoom.manager.availableAgent = _activeRoom.manager.availableAgent+parseInt(_action.agents);
+            if (_action.agents) {
+                _activeRoom.manager.availableAgent = _activeRoom.manager.availableAgent + parseInt(_action.agents);
                 app.socket.io.sockets.connected[_activeRoom.manager.socketId].emit('changeAvailableAgent', _activeRoom.manager.availableAgent);
             }
 
@@ -73,7 +95,7 @@ module.exports = function (app) {
 
             delete _activeRoom.actionInProgress[station];
             app.socket.io.to(_activeRoomName).emit('actionSolved', {station: station});
-            app.socket.io.to(_activeRoomName).emit('notification', 'Le problème à '+station+' a été réglé.');
+            app.socket.io.to(_activeRoomName).emit('notification', 'Le problème à ' + station + ' a été réglé.');
         },
         startGame: function (data) {
             var socket = this;
@@ -93,8 +115,8 @@ module.exports = function (app) {
         },
         initialisePoint: function (activeRoomName) {
             var _activeRoom = app.socket.io.sockets.adapter.rooms[activeRoomName];
-            _activeRoom.satisfaction = 100;
-            _activeRoom.manager.availableAgent = Object.keys(_activeRoom.disruptors).length*3;
+            _activeRoom.satisfaction = 10000;
+            _activeRoom.manager.availableAgent = Object.keys(_activeRoom.disruptors).length * 3;
             _activeRoom.startTime = Date.now();
             _activeRoom.actionInProgress = {};
 
@@ -121,12 +143,15 @@ module.exports = function (app) {
                 var _action = _actionsInProgress[key];
                 _activeRoom.satisfaction = Math.round(_activeRoom.satisfaction - (_action.visitors / 3));
             }
-            if(_activeRoom.satisfaction>0){
+            if (_activeRoom.satisfaction > 0) {
                 app.socket.io.to(activeRoomName).emit('changeSatisfaction', _activeRoom.satisfaction);
             }
-            else{
-                var _gameTime = (Date.now() - _activeRoom.startTime)/1000;
-                app.socket.io.to(activeRoomName).emit('stopGame', {disruptors : _activeRoom.disruptors, gameTime: _gameTime});
+            else {
+                var _gameTime = (Date.now() - _activeRoom.startTime) / 1000;
+                app.socket.io.to(activeRoomName).emit('stopGame', {
+                    disruptors: _activeRoom.disruptors,
+                    gameTime: _gameTime
+                });
                 clearInterval(_activeRoom.satisfactionChecker);
             }
 

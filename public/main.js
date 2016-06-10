@@ -46,7 +46,7 @@ function sendReaction(){
         }
     }
     else{
-
+        socket.emit('createReaction', {'station': _station, 'reaction': _reaction});
     }
 
     closeMenu();

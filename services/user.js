@@ -31,7 +31,7 @@ module.exports = function(app){
             }
             else{
                 this.manager = true;
-                app.socket.io.sockets.adapter.rooms[data].manager = {pseudo: this.pseudo, socketId: this.id};
+                app.socket.io.sockets.adapter.rooms[data].manager = {pseudo: this.pseudo, socketId: this.id, reactionUsed:{}};
                 app.socket.io.sockets.adapter.rooms[data].disruptors = {};
                 this.emit('playersList', {manager: this.pseudo, disruptors: {}});
                 this.emit('role', 'manager');

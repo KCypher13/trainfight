@@ -52,16 +52,18 @@ function sendReaction(){
 function openMenu(){
     var _station = $(this).data('id');
     var _actionId = $(this).data('actions');
-
+    var _actionMenu = $('#actionMenu');
+    var _html;
 
     if(user.role == 'disruptor'){
-        generateDisruptorMenu(_actionId, _station);
+        _html = generateDisruptorMenu(_actionId, _station);
     }
     else{
-        generateManagerMenu(_station);
+       _html =  generateManagerMenu(_station);
     }
 
-    $('#actionMenu').attr('for',_station).css('clip', 'auto');
+    _actionMenu.html(_html);
+    _actionMenu.attr('for',_station).css('clip', 'auto');
     $('.mdl-menu__container.is-upgraded').addClass('is-visible');
 }
 
@@ -82,8 +84,8 @@ function generateDisruptorMenu(actionId, stationId){
             _html += '<li class="mdl-menu__item action" data-id="'+actionId+'">'+room.actions[actionId].name+'</li>';
         }
 
-        _actionMenu.html(_html);
     }
+    return _html;
 }
 
 function generateManagerMenu(stationId){
@@ -101,7 +103,7 @@ function generateManagerMenu(stationId){
     }else{
         _html += "tout vas bien";
     }
-    _actionMenu.html(_html);
+    return _html;
 }
 
 function setPseudo(){

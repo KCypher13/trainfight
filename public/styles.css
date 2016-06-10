@@ -42,7 +42,7 @@ label{
     position: relative;
 }
 header .mdl-layout__header-row{
-    padding-right: 20px;
+    padding-left: 20px;
 }
 header a{
     text-decoration: none;

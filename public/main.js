@@ -5,10 +5,52 @@ function checkUrl() {
 
     var _roomName = _argPathname[_argPathname.indexOf("room") + 1];
     if (_roomName) {
-        room.joinRoom(_roomName);
-        $('#connexion').addClass('hide');
-        $('#waitingRoom').removeClass('hide');
-        $('#joiner').removeClass('hide');
+        var userData = {};
+        localforage.getItem('socketId').then(function(socketid){
+            if(socketid){
+                userData.socketId = localforage.getItem('socketId');
+                userData.role = localforage.getItem('role');
+                localforage.getItem('role').then(function(role){
+                    userData.role = role;
+                    if(userData.role == "manager"){
+                        $('#launcher').removeClass('hide');
+                    }
+                    else{
+                        $('#joiner').removeClass('hide');
+                    }
+                    localforage.getItem('socketId').then(function(socketId){
+                        userData.socketId = socketId;
+                        room.joinRoom(_roomName, userData);
+                    });
+                });
+
+                localforage.getItem('pseudo').then(function(pseudo){
+                    user.changePseudo(pseudo);
+                });
+                localforage.getItem('role').then(function(role){
+                    user.setRole(role);
+                });
+                localforage.getItem('availableAgent').then(function(availableAgent){
+                    user.setAvailableAgent(availableAgent);
+                });
+                localforage.getItem('actionPoint').then(function(actionPoint){
+                    user.setActionPoint(actionPoint);
+                });
+
+            }
+            else{
+                room.joinRoom(_roomName);
+                $('#joiner').removeClass('hide');
+            }
+            $('#connexion').addClass('hide');
+            $('#waitingRoom').removeClass('hide');
+
+        });
+
+
+    }
+    else{
+        localforage.clear();
     }
 }
 
@@ -27,14 +69,14 @@ function createRoom(e) {
 }
 
 function sendAction() {
-    var _station = $(this).parent().parent().data('id');
+    var _station = $(this).parent().parent().parent().data('id');
     var _action = $(this).data('id');
     socket.emit('createAction', {'station': _station, 'action': _action});
     closeMenu();
 }
 
 function sendReaction(){
-    var _station = $(this).parent().parent().data('id');
+    var _station = $(this).parent().parent().parent().data('id');
     var _reaction = room.reactions[$(this).data('id')];
     if(!_reaction.asRecovery){
         var _nbAgent = prompt('combien d\'agent à envoyer ?');
@@ -46,7 +88,7 @@ function sendReaction(){
         }
     }
     else{
-
+        socket.emit('createReaction', {'station': _station, 'reaction': _reaction});
     }
 
     closeMenu();
@@ -97,7 +139,10 @@ function generateDisruptorMenu(actionId, stationId){
 
 function generateManagerMenu(stationId){
     var _html = "";
-    if(room.actionInProgress[stationId]){
+    if(room.reactionInProgress[stationId]){
+        _html += "operation en cours";
+    }
+   else if(room.actionInProgress[stationId]){
         for(key in room.reactions){
             var _reaction = room.reactions[key];
 
@@ -143,8 +188,13 @@ socket.on('newAction', function (data) {
     room.actionInProgress[data.station.id] = data;
 });
 
+socket.on('newReaction', function (data) {
+    room.reactionInProgress[data] = data;
+});
+
 socket.on('actionSolved', function (data) {
     delete room.actionInProgress[data.station];
+    delete room.reactionInProgress[data.station]
 });
 
 socket.on('playersList', function (data) {
@@ -185,9 +235,21 @@ socket.on('changeSatisfaction', function(data){
 });
 
 socket.on('role', function(data){
-    user.role = data;
+    user.setRole(data);
+
 });
 
-socket.on('notification', function(message){
-    alert(message);
+socket.on('notification', function (message) {
+    var _data;
+    var snackbarContainer = document.querySelector('#notificationSnackbar');
+    if (typeof(message) == "string") {
+        _data = {message: message};
+    }
+    snackbarContainer.MaterialSnackbar.showSnackbar(_data);
+});
+
+socket.on('stopGame', function (data) {
+    console.log(data);
+    $('#game').addClass('hide');
+    $('#scoreEndGame').removeClass('hide');
 });

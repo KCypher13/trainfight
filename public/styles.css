@@ -85,6 +85,10 @@ p i.material-icons{
     height: 100%;
     position: absolute;
     zoom: 0.7;
+    -ms-zoom: 0.7;
+    -webkit-zoom: 0.7;
+    -moz-transform:  scale(0.7,0.7);
+    -moz-transform-origin: left top;
 }
 #mapBackground {
     z-index: 10;

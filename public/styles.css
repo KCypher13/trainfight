@@ -72,6 +72,9 @@ p i.material-icons{
     font-size: 5em;
     color: #00AA90;
 }
+.playersList .mdl-list__item{
+    padding: 10px 16px;
+}
 /*-------------------------------
 == #GAME (map)
 -------------------------------*/

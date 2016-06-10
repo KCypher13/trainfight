@@ -47,7 +47,9 @@ module.exports = function (app) {
                     if (_manager.availableAgent >= data.nbAgents) {
                         var _gravity = _actionTarget.gravity;
                         var _resolutionTime = _gravity/data.nbAgents*3000;
-                        console.log(_resolutionTime);
+                        _actionTarget.agents = data.nbAgents;
+                        _activeRoom.manager.availableAgent = _manager.availableAgent-data.nbAgents;
+                        _socket.emit('changeAvailableAgent', _activeRoom.manager.availableAgent);
                         setTimeout(function(){app.room.solveAction(_activeRoom, data.station, _activeRoomName)}, _resolutionTime);
                         _socket.emit('notification', 'Les agents sont en route');
                     }
@@ -57,8 +59,15 @@ module.exports = function (app) {
         solveAction: function(_activeRoom, station, _activeRoomName){
             var _action = _activeRoom.actionInProgress[station];
             var _dateNow = Date.now();
-            var _newPoint = Math.round((_dateNow - _action.startTime)/1000);
+            var _newPoint = (Math.round((_dateNow - _action.startTime)/800)>=10) ? Math.round((_dateNow - _action.startTime)/800) : 10 ;
+
+            if(_action.agents){
+                _activeRoom.manager.availableAgent = _activeRoom.manager.availableAgent+parseInt(_action.agents);
+                app.socket.io.sockets.connected[_activeRoom.manager.socketId].emit('changeAvailableAgent', _activeRoom.manager.availableAgent);
+            }
+
             app.socket.io.sockets.connected[_action.user].emit('changeActionPoint', _newPoint);
+
             delete _activeRoom.actionInProgress[station];
             app.socket.io.to(_activeRoomName).emit('notification', 'Le problème à '+station+' a été réglé.');
         },

@@ -5,10 +5,52 @@ function checkUrl() {
 
     var _roomName = _argPathname[_argPathname.indexOf("room") + 1];
     if (_roomName) {
-        room.joinRoom(_roomName);
-        $('#connexion').addClass('hide');
-        $('#waitingRoom').removeClass('hide');
-        $('#joiner').removeClass('hide');
+        var userData = {};
+        localforage.getItem('socketId').then(function(socketid){
+            if(socketid){
+                userData.socketId = localforage.getItem('socketId');
+                userData.role = localforage.getItem('role');
+                localforage.getItem('role').then(function(role){
+                    userData.role = role;
+                    if(userData.role == "manager"){
+                        $('#launcher').removeClass('hide');
+                    }
+                    else{
+                        $('#joiner').removeClass('hide');
+                    }
+                    localforage.getItem('socketId').then(function(socketId){
+                        userData.socketId = socketId;
+                        room.joinRoom(_roomName, userData);
+                    });
+                });
+
+                localforage.getItem('pseudo').then(function(pseudo){
+                    user.changePseudo(pseudo);
+                });
+                localforage.getItem('role').then(function(role){
+                    user.setRole(role);
+                });
+                localforage.getItem('availableAgent').then(function(availableAgent){
+                    user.setAvailableAgent(availableAgent);
+                });
+                localforage.getItem('actionPoint').then(function(actionPoint){
+                    user.setActionPoint(actionPoint);
+                });
+
+            }
+            else{
+                room.joinRoom(_roomName);
+                $('#joiner').removeClass('hide');
+            }
+            $('#connexion').addClass('hide');
+            $('#waitingRoom').removeClass('hide');
+
+        });
+
+
+    }
+    else{
+        localforage.clear();
     }
 }
 
@@ -27,13 +69,14 @@ function createRoom(e) {
 }
 
 function sendAction() {
-    var _station = $(this).parent().attr('for');
+    var _station = $(this).parent().parent().parent().data('id');
     var _action = $(this).data('id');
     socket.emit('createAction', {'station': _station, 'action': _action});
+    closeMenu();
 }
 
 function sendReaction(){
-    var _station = $(this).parent().attr('for');
+    var _station = $(this).parent().parent().parent().data('id');
     var _reaction = room.reactions[$(this).data('id')];
     if(!_reaction.asRecovery){
         var _nbAgent = prompt('combien d\'agent à envoyer ?');
@@ -45,29 +88,37 @@ function sendReaction(){
         }
     }
     else{
-
+        socket.emit('createReaction', {'station': _station, 'reaction': _reaction});
     }
+
+    closeMenu();
+}
+
+function closeMenu(){
+    $('.customMenu').remove();
 }
 
 function openMenu(){
-    var _station = $(this).data('id');
-    var _actionId = $(this).data('actions');
-
+    var _station = $(this).parent().data('id');
+    var _actionId = $(this).parent().data('actions');
+    var _actionMenu = $('#actionMenu');
+    var _html = '<div class="customMenu"><div class="triangle"></div><ul>';
 
     if(user.role == 'disruptor'){
-        generateDisruptorMenu(_actionId, _station);
+        _html += generateDisruptorMenu(_actionId, _station);
     }
     else{
-        generateManagerMenu(_station);
+       _html +=  generateManagerMenu(_station);
     }
+    _html += "</ul></div>";
 
-    $('#actionMenu').attr('for',_station).css('clip', 'auto');
-    $('.mdl-menu__container.is-upgraded').addClass('is-visible');
+    closeMenu();
+    $(this).parent().append(_html);
+
 }
 
 function generateDisruptorMenu(actionId, stationId){
     var _html = "";
-    var _actionMenu = $('#actionMenu');
     if(room.actionInProgress[stationId]){
         _html += "operation en cours";
     }
@@ -75,33 +126,35 @@ function generateDisruptorMenu(actionId, stationId){
         if(actionId.length>1){
             var _actionsArray = _actionId.split(',');
             for(key in _actionsArray){
-                _html += '<li class="mdl-menu__item action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
+                _html += '<li class="action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
             }
         }
         else{
-            _html += '<li class="mdl-menu__item action" data-id="'+actionId+'">'+room.actions[actionId].name+'</li>';
+            _html += '<li class="action" data-id="'+actionId+'">'+room.actions[actionId].name+'</li>';
         }
 
-        _actionMenu.html(_html);
     }
+    return _html;
 }
 
 function generateManagerMenu(stationId){
     var _html = "";
-    var _actionMenu = $('#actionMenu');
-    if(room.actionInProgress[stationId]){
+    if(room.reactionInProgress[stationId]){
+        _html += "operation en cours";
+    }
+   else if(room.actionInProgress[stationId]){
         for(key in room.reactions){
             var _reaction = room.reactions[key];
 
             if(_reaction.actions.indexOf(room.actionInProgress[stationId].action.id) >-1){
-                _html += '<li class="mdl-menu__item reaction" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+                _html += '<li class="reaction" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
             }
         }
 
     }else{
         _html += "tout vas bien";
     }
-    _actionMenu.html(_html);
+    return _html;
 }
 
 function setPseudo(){
@@ -115,7 +168,7 @@ function startGame(){
 $(function () {
     checkUrl();
     $('#createRoom').click(createRoom);
-    $('body').on('click', '.station', openMenu);
+    $('body').on('click', '.station .buttonStation', openMenu);
     $('#joinGame').click(setPseudo);
     $('#startGame').click(startGame);
     $('body').on('click', '.action', sendAction);
@@ -133,6 +186,15 @@ $(function () {
 
 socket.on('newAction', function (data) {
     room.actionInProgress[data.station.id] = data;
+});
+
+socket.on('newReaction', function (data) {
+    room.reactionInProgress[data] = data;
+});
+
+socket.on('actionSolved', function (data) {
+    delete room.actionInProgress[data.station];
+    delete room.reactionInProgress[data.station]
 });
 
 socket.on('playersList', function (data) {
@@ -173,9 +235,21 @@ socket.on('changeSatisfaction', function(data){
 });
 
 socket.on('role', function(data){
-    user.role = data;
+    user.setRole(data);
+
 });
 
-socket.on('notification', function(message){
-    alert(message);
+socket.on('notification', function (message) {
+    var _data;
+    var snackbarContainer = document.querySelector('#notificationSnackbar');
+    if (typeof(message) == "string") {
+        _data = {message: message};
+    }
+    snackbarContainer.MaterialSnackbar.showSnackbar(_data);
+});
+
+socket.on('stopGame', function (data) {
+    console.log(data);
+    $('#game').addClass('hide');
+    $('#scoreEndGame').removeClass('hide');
 });

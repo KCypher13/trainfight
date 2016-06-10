@@ -239,8 +239,13 @@ socket.on('role', function(data){
 
 });
 
-socket.on('notification', function(message){
-    alert(message);
+socket.on('notification', function (message) {
+    var _data;
+    var snackbarContainer = document.querySelector('#notificationSnackbar');
+    if (typeof(message) == "string") {
+        _data = {message: message};
+    }
+    snackbarContainer.MaterialSnackbar.showSnackbar(_data);
 });
 
 socket.on('stopGame', function (data) {

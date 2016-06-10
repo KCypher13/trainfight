@@ -5,10 +5,52 @@ function checkUrl() {
 
     var _roomName = _argPathname[_argPathname.indexOf("room") + 1];
     if (_roomName) {
-        room.joinRoom(_roomName);
-        $('#connexion').addClass('hide');
-        $('#waitingRoom').removeClass('hide');
-        $('#joiner').removeClass('hide');
+        var userData = {};
+        localforage.getItem('socketId').then(function(socketid){
+            if(socketid){
+                userData.socketId = localforage.getItem('socketId');
+                userData.role = localforage.getItem('role');
+                localforage.getItem('role').then(function(role){
+                    userData.role = role;
+                    if(userData.role == "manager"){
+                        $('#launcher').removeClass('hide');
+                    }
+                    else{
+                        $('#joiner').removeClass('hide');
+                    }
+                    localforage.getItem('socketId').then(function(socketId){
+                        userData.socketId = socketId;
+                        room.joinRoom(_roomName, userData);
+                    });
+                });
+
+                localforage.getItem('pseudo').then(function(pseudo){
+                    user.changePseudo(pseudo);
+                });
+                localforage.getItem('role').then(function(role){
+                    user.setRole(role);
+                });
+                localforage.getItem('availableAgent').then(function(availableAgent){
+                    user.setAvailableAgent(availableAgent);
+                });
+                localforage.getItem('actionPoint').then(function(actionPoint){
+                    user.setActionPoint(actionPoint);
+                });
+
+            }
+            else{
+                room.joinRoom(_roomName);
+                $('#joiner').removeClass('hide');
+            }
+            $('#connexion').addClass('hide');
+            $('#waitingRoom').removeClass('hide');
+
+        });
+
+
+    }
+    else{
+        localforage.clear();
     }
 }
 
@@ -185,7 +227,8 @@ socket.on('changeSatisfaction', function(data){
 });
 
 socket.on('role', function(data){
-    user.role = data;
+    user.setRole(data);
+
 });
 
 socket.on('notification', function(message){

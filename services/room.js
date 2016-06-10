@@ -99,11 +99,11 @@ module.exports = function (app) {
         },
         startGame: function (data) {
             var socket = this;
-            app.db.getLines(function (lines) {
-                app.db.getStationsFromLines(lines, function (data) {
-                    app.socket.io.to(socket.activeRoom).emit('generateLine', data);
-                });
+
+            app.room.sendMap(function(data){
+                app.socket.io.to(socket.activeRoom).emit('generateLine', data);
             });
+
             app.db.getActions(function (actions) {
                 app.socket.io.to(socket.activeRoom).emit('hydrateActions', actions);
             });
@@ -112,6 +112,15 @@ module.exports = function (app) {
             });
             app.room.initialisePoint(socket.activeRoom);
 
+        },
+        sendMap:function(cb){
+            app.db.getLines(function (lines) {
+                app.db.getStationsFromLines(lines, function (data) {
+                    if(cb) {
+                        cb(data);
+                    }
+                });
+            });
         },
         initialisePoint: function (activeRoomName) {
             var _activeRoom = app.socket.io.sockets.adapter.rooms[activeRoomName];

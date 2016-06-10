@@ -5,11 +5,12 @@ var room = {
     actions : {},
     reactions :{},
     actionInProgress:{},
-    joinRoom: function (roomName) {
+    joinRoom: function (roomName, userData) {
+        var _userData = (userData)? userData : null;
         this.name = roomName;
-        socket.emit('joinRoom', this.name);
+        socket.emit('joinRoom', {room: this.name,userData: _userData});
         var stateObj = {page: "waitingRoom"};
-        //history.pushState(stateObj, "Room" + this.name, "/room/" + this.name);
+        history.pushState(stateObj, "Room" + this.name, "/room/" + this.name);
     },
     generatePlayerlist: function(){
 

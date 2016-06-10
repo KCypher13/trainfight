@@ -52,7 +52,7 @@ header a{
 == #CONNEXION (homepage)
 -------------------------------*/
 h1{
-    height: 80px;
+    height: 160px;
     background: url('img/logo_train_fight.svg') center no-repeat;
     font-size: 0;
 }
@@ -77,12 +77,6 @@ p i.material-icons{
 #mapGame{
     width: 100%;
     height: 100vh;
-    /*background: url('img/map.png') no-repeat top left;*/
-    /*background: url('img/map.png') no-repeat center center;
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      -o-background-size: cover;
-      background-size: cover;*/
     position: relative;
     overflow: scroll;
 }
@@ -114,9 +108,15 @@ p i.material-icons{
     margin-bottom: 15px;
 }
 
+/*-------------------------------
+== Responsive
+-------------------------------*/
 @media screen and (max-width: 960px)
 {
-    /* Rédigez vos propriétés CSS ici */
+
+    h1{
+        height: 80px;
+    }
     .map{
         zoom: 0.5;
     }

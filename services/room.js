@@ -69,6 +69,7 @@ module.exports = function (app) {
             app.socket.io.sockets.connected[_action.user].emit('changeActionPoint', _newPoint);
 
             delete _activeRoom.actionInProgress[station];
+            app.socket.io.to(_activeRoomName).emit('actionSolved', {station: station});
             app.socket.io.to(_activeRoomName).emit('notification', 'Le problème à '+station+' a été réglé.');
         },
         startGame: function (data) {

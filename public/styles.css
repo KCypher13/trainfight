@@ -107,6 +107,9 @@ p i.material-icons{
     height: 20px;
     margin-bottom: 15px;
 }
+.station{
+    position: absolute;
+}
 
 /*-------------------------------
 == Responsive

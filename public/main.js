@@ -27,13 +27,14 @@ function createRoom(e) {
 }
 
 function sendAction() {
-    var _station = $(this).parent().attr('for');
+    var _station = $(this).parent().parent().data('id');
     var _action = $(this).data('id');
     socket.emit('createAction', {'station': _station, 'action': _action});
+    closeMenu();
 }
 
 function sendReaction(){
-    var _station = $(this).parent().attr('for');
+    var _station = $(this).parent().parent().data('id');
     var _reaction = room.reactions[$(this).data('id')];
     if(!_reaction.asRecovery){
         var _nbAgent = prompt('combien d\'agent à envoyer ?');
@@ -47,29 +48,35 @@ function sendReaction(){
     else{
 
     }
+
+    closeMenu();
+}
+
+function closeMenu(){
+    $('.customMenu').remove();
 }
 
 function openMenu(){
-    var _station = $(this).data('id');
-    var _actionId = $(this).data('actions');
+    var _station = $(this).parent().data('id');
+    var _actionId = $(this).parent().data('actions');
     var _actionMenu = $('#actionMenu');
-    var _html;
+    var _html = '<div class="customMenu">';
 
     if(user.role == 'disruptor'){
-        _html = generateDisruptorMenu(_actionId, _station);
+        _html += generateDisruptorMenu(_actionId, _station);
     }
     else{
-       _html =  generateManagerMenu(_station);
+       _html +=  generateManagerMenu(_station);
     }
+    _html += "</div>";
 
-    _actionMenu.html(_html);
-    _actionMenu.attr('for',_station).css('clip', 'auto');
-    $('.mdl-menu__container.is-upgraded').addClass('is-visible');
+    closeMenu();
+    $(this).parent().append(_html);
+
 }
 
 function generateDisruptorMenu(actionId, stationId){
     var _html = "";
-    var _actionMenu = $('#actionMenu');
     if(room.actionInProgress[stationId]){
         _html += "operation en cours";
     }
@@ -77,11 +84,11 @@ function generateDisruptorMenu(actionId, stationId){
         if(actionId.length>1){
             var _actionsArray = _actionId.split(',');
             for(key in _actionsArray){
-                _html += '<li class="mdl-menu__item action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
+                _html += '<li class="action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
             }
         }
         else{
-            _html += '<li class="mdl-menu__item action" data-id="'+actionId+'">'+room.actions[actionId].name+'</li>';
+            _html += '<li class="action" data-id="'+actionId+'">'+room.actions[actionId].name+'</li>';
         }
 
     }
@@ -90,13 +97,12 @@ function generateDisruptorMenu(actionId, stationId){
 
 function generateManagerMenu(stationId){
     var _html = "";
-    var _actionMenu = $('#actionMenu');
     if(room.actionInProgress[stationId]){
         for(key in room.reactions){
             var _reaction = room.reactions[key];
 
             if(_reaction.actions.indexOf(room.actionInProgress[stationId].action.id) >-1){
-                _html += '<li class="mdl-menu__item reaction" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+                _html += '<li class="reaction" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
             }
         }
 
@@ -117,7 +123,7 @@ function startGame(){
 $(function () {
     checkUrl();
     $('#createRoom').click(createRoom);
-    $('body').on('click', '.station', openMenu);
+    $('body').on('click', '.station .buttonStation', openMenu);
     $('#joinGame').click(setPseudo);
     $('#startGame').click(startGame);
     $('body').on('click', '.action', sendAction);
@@ -135,6 +141,10 @@ $(function () {
 
 socket.on('newAction', function (data) {
     room.actionInProgress[data.station.id] = data;
+});
+
+socket.on('actionSolved', function (data) {
+    delete room.actionInProgress[data.station];
 });
 
 socket.on('playersList', function (data) {

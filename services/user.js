@@ -8,7 +8,7 @@ module.exports = function(app){
             if (_room) {
                 this.pseudo = data;
 
-                _room.disruptors[this.id] = ({pseudo: this.pseudo, socketId: this.id, actionPoint: 10});
+                _room.disruptors[this.id] = ({pseudo: this.pseudo, socketId: this.id, actionPoint: 10, score: 0});
                 app.socket.io.to(this.activeRoom).emit('playersList', {manager:_room.manager.pseudo, disruptors: _room.disruptors});
                 this.emit('role', 'disruptor');
             }

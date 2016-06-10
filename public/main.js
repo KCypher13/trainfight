@@ -191,3 +191,9 @@ socket.on('role', function(data){
 socket.on('notification', function(message){
     alert(message);
 });
+
+socket.on('stopGame', function (data) {
+    console.log(data);
+    $('#game').addClass('hide');
+    $('#scoreEndGame').removeClass('hide');
+});

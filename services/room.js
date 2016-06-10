@@ -59,6 +59,7 @@ module.exports = function (app) {
         solveAction: function(_activeRoom, station, _activeRoomName){
             var _action = _activeRoom.actionInProgress[station];
             var _dateNow = Date.now();
+            var _scoring = Math.round((_dateNow - _action.startTime)/1000);
             var _newPoint = (Math.round((_dateNow - _action.startTime)/800)>=10) ? Math.round((_dateNow - _action.startTime)/800) : 10 ;
 
             if(_action.agents){
@@ -67,6 +68,7 @@ module.exports = function (app) {
             }
 
             _activeRoom.disruptors[_action.user].actionPoint = _newPoint;
+            _activeRoom.disruptors[_action.user].score += _scoring;
             app.socket.io.sockets.connected[_action.user].emit('changeActionPoint', _newPoint);
 
             delete _activeRoom.actionInProgress[station];
@@ -91,7 +93,7 @@ module.exports = function (app) {
         },
         initialisePoint: function (activeRoomName) {
             var _activeRoom = app.socket.io.sockets.adapter.rooms[activeRoomName];
-            _activeRoom.satisfaction = 10000;
+            _activeRoom.satisfaction = 100;
             _activeRoom.manager.availableAgent = Object.keys(_activeRoom.disruptors).length*3;
             _activeRoom.startTime = Date.now();
             _activeRoom.actionInProgress = {};
@@ -119,7 +121,15 @@ module.exports = function (app) {
                 var _action = _actionsInProgress[key];
                 _activeRoom.satisfaction = Math.round(_activeRoom.satisfaction - (_action.visitors / 3));
             }
-            app.socket.io.to(activeRoomName).emit('changeSatisfaction', _activeRoom.satisfaction);
+            if(_activeRoom.satisfaction>0){
+                app.socket.io.to(activeRoomName).emit('changeSatisfaction', _activeRoom.satisfaction);
+            }
+            else{
+                var _gameTime = (Date.now() - _activeRoom.startTime)/1000;
+                app.socket.io.to(activeRoomName).emit('stopGame', {disruptors : _activeRoom.disruptors, gameTime: _gameTime});
+                clearInterval(_activeRoom.satisfactionChecker);
+            }
+
         }
 
     }

@@ -1,6 +1,14 @@
 /*-------------------------------
 == COMMON
 -------------------------------*/
+body > .mdl-grid:first-child{
+    padding: 0;
+}
+body > .container{
+    width: 100%;
+    margin: 0;
+}
+
 /* helpers class */
 .hide{
     display:none
@@ -18,21 +26,13 @@ h3{
     font-size: 1.250em;
     font-weight: bold;
 }
-/* action's elements */
+/* common's elements */
 button.mdl-button{
     display: block;
     margin: 25px auto 15px;
 }
-input, label{
-    display: block;
-    width: 90%;
-    padding: 10px 5px;
-}
-input{
-    border: 3px solid #95989A;
-}
-label{
-    margin-bottom: 0px;
+i.material-icons{
+    vertical-align: middle;
 }
 
 /*-------------------------------
@@ -52,6 +52,13 @@ header a{
 /*-------------------------------
 == #CONNEXION (homepage)
 -------------------------------*/
+#connexion{
+    /*background: url('img/map.png') top center no-repeat;*/
+}
+#connexion .mdl-card{
+    margin: 0;
+    padding: 20px;
+}
 h1{
     height: 160px;
     background: url('img/logo_train_fight.svg') center no-repeat;
@@ -75,6 +82,21 @@ p i.material-icons{
 .playersList .mdl-list__item{
     padding: 10px 16px;
 }
+/*.players li{
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+.players h3{
+    color: #fff;
+    padding: 1px 15px;
+    text-transform: uppercase;
+}
+.players.managerPlayer li{ background-image: url('img/manager-train.svg'); }
+.players.disruptorsPlayers li{ background-image: url('img/disruptors-train.svg'); }
+.players.managerPlayer h3{ background-color: #4FB9AE; }
+.players.disruptorsPlayers h3{ background-color: #DC0D15; }*/
+
 /*-------------------------------
 == #GAME (map)
 -------------------------------*/
@@ -120,6 +142,9 @@ p i.material-icons{
 
     h1{
         height: 80px;
+    }
+    #connexion .demo-card-wide{
+        margin: auto;
     }
     .map{
         zoom: 0.5;

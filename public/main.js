@@ -102,7 +102,7 @@ function openMenu(){
     var _station = $(this).parent().data('id');
     var _actionId = $(this).parent().data('actions');
     var _actionMenu = $('#actionMenu');
-    var _html = '<div class="customMenu">';
+    var _html = '<div class="customMenu"><div class="triangle"></div><ul>';
 
     if(user.role == 'disruptor'){
         _html += generateDisruptorMenu(_actionId, _station);
@@ -110,7 +110,7 @@ function openMenu(){
     else{
        _html +=  generateManagerMenu(_station);
     }
-    _html += "</div>";
+    _html += "</ul></div>";
 
     closeMenu();
     $(this).parent().append(_html);

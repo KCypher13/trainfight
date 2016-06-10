@@ -84,7 +84,7 @@ p i.material-icons{
     width: 100%;
     height: 100%;
     position: absolute;
-    zoom: 1;
+    zoom: 0.7;
 }
 #mapBackground {
     z-index: 10;
@@ -110,7 +110,53 @@ p i.material-icons{
 .station{
     position: absolute;
 }
-
+.buttonStation {
+    background-color: #FFF;
+    border: 3px solid #000;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-indent: -99999px;
+}
+.buttonStation:hover {
+    background-color: rgba(255,255,255,0.5);
+    cursor: pointer;
+}
+.customMenu ul{
+    background-color: #FFF;
+    color: #2B3B8F;
+    width: 200px;
+    padding: 5px;
+    text-align: center;
+    left: -240%;
+    position: absolute;
+    z-index: 50;
+    box-shadow: 0px 2px 7px #000;
+    font-weight: bold;
+}
+.customMenu li{
+    list-style: none;
+    padding: 3px;
+    margin-bottom: 5px;
+}
+.customMenu li:hover{
+    background-color: #EEE;
+}
+.triangle {
+    width: 30px;
+    height: 30px;
+    background-color: #FFF;
+    top: 80%;
+    left: 10%;
+    z-index: 40;
+    position: absolute;
+    box-shadow: 2px 3px 7px #000;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+}
 /*-------------------------------
 == Responsive
 -------------------------------*/

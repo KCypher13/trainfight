@@ -97,7 +97,10 @@ module.exports = function (app) {
 
             delete _activeRoom.actionInProgress[station];
             app.socket.io.to(_activeRoomName).emit('actionSolved', {station: station});
-            app.socket.io.to(_activeRoomName).emit('notification', 'Le problème à ' + station + ' a été réglé.');
+            app.db.getStation(station, function(station){
+                app.socket.io.to(_activeRoomName).emit('notification', 'Le problème à ' + station.name + ' a été réglé.');
+            });
+
         },
         startGame: function (data) {
             var socket = this;

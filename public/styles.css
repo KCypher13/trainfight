@@ -118,12 +118,30 @@ p i.material-icons{
     border-radius: 50%;
     text-indent: -99999px;
 }
+.buttonStation:hover {
+    background-color: rgba(255,255,255,0.5);
+    cursor: pointer;
+}
 .customMenu {
     background-color: #FFF;
     color: #2B3B8F;
     width: 200px;
+    padding: 5px;
+    text-align: center;
+    left: -240%;
+    position: absolute;
+    z-index: 50;
+    box-shadow: 0px 2px 7px #000;
+    font-weight: bold;
 }
-
+.customMenu li{
+    list-style: none;
+    padding: 3px;
+    margin-bottom: 5px;
+}
+.customMenu li:hover{
+    background-color: #EEE;
+}
 /*-------------------------------
 == Responsive
 -------------------------------*/

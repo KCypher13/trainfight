@@ -22,6 +22,7 @@ var room = {
         if(!jQuery.isEmptyObject(this.disruptors)) $('#waitingPlayers').addClass('hide');
     },
     generateStation: function(lines){
+        var heightHeaderMap = initializeHeaderMap();
         var _html = "";
         for(key in lines){
             var _line = lines[key];
@@ -41,7 +42,7 @@ var room = {
                     }
                     _html += '"';
                 }
-                _html += ' style="top:'+(_station.locationY-23)*0.7+'px;left:'+(_station.locationX-22)*0.7+'px">';
+                _html += ' style="top:'+((_station.locationY+heightHeaderMap)-23)*0.7+'px;left:'+(_station.locationX-22)*0.7+'px">';
                 _html += '<div class="markerProgress hide"><p>100%</p></div>';
                 _html += '<p class="buttonStation">'+_station.name+'</p>';
                 _html += '</div>';
@@ -51,7 +52,7 @@ var room = {
     },
     setSatisfaction: function(satisfaction){
         this.satisfaction = satisfaction;
-        $('.satisfaction').text(satisfaction/100);
+        $('.satisfaction').text(satisfaction/100+'%');
         document.querySelector('#progressBar').MaterialProgress.setProgress(satisfaction/100);
     }
 };

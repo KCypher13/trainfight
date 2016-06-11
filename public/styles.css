@@ -108,6 +108,37 @@ p i.material-icons{
 /*-------------------------------
 == #GAME (map)
 -------------------------------*/
+/* Header of map */
+.mapInformations{
+    position:fixed;
+    width: 100%;
+    min-height: inherit;
+    z-index: 10;
+    padding: 10px;
+}
+.mapInformations p{
+    margin-bottom: 5px;
+    font-size: 1em;
+}
+.availableAgent, .actionPoint{
+    background-position: top left;
+    background-repeat: no-repeat;
+    line-height: 69px;
+    text-align: center;
+}
+.availableAgent{ background-image: url('img/manager-icon.png'); }
+.actionPoint{ background-image: url('img/disruptor-icon.png'); }
+#progressBar{
+    display: inline-block;
+    vertical-align: top;
+    height: 20px;
+}
+.satisfaction{
+    margin-left: 10px;
+    font-weight: bold;
+    font-size: 1.3em;
+}
+/* Map */
 #mapGame{
     width: 100%;
     height: 100vh;
@@ -132,20 +163,6 @@ p i.material-icons{
 }
 #rerB{
     z-index: 30;
-}
-.mapInformations{
-    position:fixed;
-    width: 100%;
-    z-index: 10;
-    padding: 10px;
-    background-color: #ccc;
-}
-.mapInformations p{
-    margin-bottom: 5px;
-}
-#progressBar{
-    height: 20px;
-    margin-bottom: 15px;
 }
 .station{
     position: absolute;
@@ -197,6 +214,7 @@ p i.material-icons{
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
 }
+
 /*-------------------------------
 == Responsive
 -------------------------------*/

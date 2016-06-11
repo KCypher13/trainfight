@@ -174,6 +174,11 @@ function notification(message){
     }
 }
 
+function initializeHeaderMap(){
+    var heightHeaderMap = $('.mapInformations').height();
+    return heightHeaderMap;
+}
+
 $(function () {
     checkUrl();
     $('#createRoom').click(createRoom);
@@ -219,6 +224,8 @@ socket.on('generateLine', function(data){
     $('#waitingRoom').addClass('hide');
     $('#game').removeClass('hide');
     $('.container').addClass('reset');
+    var heightHeaderMap = initializeHeaderMap();
+    $('#mapGame').css('padding-top', heightHeaderMap+20);
     room.generateStation(data);
 });
 

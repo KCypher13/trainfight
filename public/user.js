@@ -10,12 +10,12 @@ var user = {
     },
     setActionPoint: function(point){
         this.actionPoint = point;
-        $('.actionPoint').text(point);
+        $('.actionPoint').text('Nombre de points : '+point);
         localforage.setItem('actionPoint', point);
     },
     setAvailableAgent: function(agent){
         this.availableAgent = agent;
-        $('.availableAgent').text(agent);
+        $('.availableAgent').text('Nombre d\'agents disponibles : '+agent);
         localforage.setItem('availableAgent', agent);
     },
     setRole: function(role){

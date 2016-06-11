@@ -165,6 +165,15 @@ function startGame(){
     socket.emit('startGame');
 }
 
+function notification(message){
+    var _data;
+    var snackbarContainer = document.querySelector('#notificationSnackbar');
+    if (typeof(message) == "string") {
+        _data = {message: message};
+        snackbarContainer.MaterialSnackbar.showSnackbar(_data);
+    }
+}
+
 $(function () {
     checkUrl();
     $('#createRoom').click(createRoom);
@@ -186,6 +195,9 @@ $(function () {
 
 socket.on('newAction', function (data) {
     room.actionInProgress[data.station.id] = data;
+
+    var _message = data.user+' a provoqué '+data.action.name+' à '+data.station.name;
+    notification(_message);
 });
 
 socket.on('newReaction', function (data) {
@@ -239,14 +251,9 @@ socket.on('role', function(data){
 
 });
 
-socket.on('notification', function (message) {
-    var _data;
-    var snackbarContainer = document.querySelector('#notificationSnackbar');
-    if (typeof(message) == "string") {
-        _data = {message: message};
-    }
-    snackbarContainer.MaterialSnackbar.showSnackbar(_data);
-});
+socket.on('notification', notification);
+
+
 
 socket.on('stopGame', function (data) {
     console.log(data);

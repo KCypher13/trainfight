@@ -57,7 +57,7 @@
                             </div>
                         </div>
                         <div class="mdl-grid">
-                            <div class="players managerPlayer mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
+                            <div class="players managerPlayer mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col mdl-cell--4-col-phone">
                                 <h3>Le contrôleur</h3>
                                 <ul class="demo-list-action mdl-list">
                                     <li class="mdl-list__item">
@@ -65,25 +65,25 @@
                                             <i class="material-icons mdl-list__item-avatar">person</i>
                                             <span class="manager"></span>
                                         </span>
-                                        <span class="mdl-list__item-secondary-action">
-                                            picto
-                                        </span>
                                     </li>
                                 </ul>
                             </div>
-                             <div class="players disruptorsPlayers mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
+                            <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+                                icone éclair
+                            </div>
+                            <div class="players disruptorsPlayers mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col mdl-cell--4-col-phone">
                                 <h3>Le(s) perturbateur(s)</h3>
                                 <ul class="disruptors" class="demo-list-action mdl-list">
                                 
                                 </ul>
+                                <div id="waitingPlayers">
+                                    <p>En attente de joueur</p>
+                                    <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="mdl-grid">
                             <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
-                                <div id="waitingPlayers">
-                                    <p>En attente de joueurs</p>
-                                    <p><i class="material-icons">restore</i></p>
-                                </div>
                                 <div id="launcher" class="hide">
                                     <button id="startGame"
                                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
@@ -98,8 +98,10 @@
                                 </div>
                                 <div id="joiner" class="hide">
                                     <h2>Rejoindre la room</h2>
-                                    <label for="pseudo">Votre pseudo</label>
-                                    <input type="text" id="pseudo" placeholder="Entrez votre pseudo"/>
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                        <input class="mdl-textfield__input" type="text" id="pseudo"/>
+                                        <label class="mdl-textfield__label" for="pseudo">Votre pseudo</label>
+                                    </div>
                                     <button id="joinGame"
                                             class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
                                         Rejoindre

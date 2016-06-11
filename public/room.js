@@ -51,6 +51,7 @@ var room = {
     },
     setSatisfaction: function(satisfaction){
         this.satisfaction = satisfaction;
-        $('.satisfaction').text(satisfaction);
+        $('.satisfaction').text(satisfaction/100);
+        document.querySelector('#progressBar').MaterialProgress.setProgress(satisfaction/100);
     }
 };

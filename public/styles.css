@@ -13,6 +13,10 @@ body > .container{
 .hide{
     display:none
 }
+.reset{
+    width: 100%;
+    margin: 0;
+}
 /* titles */
 h2, h3{
     text-align: center;
@@ -130,7 +134,9 @@ p i.material-icons{
     z-index: 30;
 }
 .mapInformations{
-    z-index: 0;
+    position:fixed;
+    width: 100%;
+    z-index: 10;
     padding: 10px;
     background-color: #ccc;
 }

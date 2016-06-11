@@ -218,6 +218,7 @@ socket.on('playersList', function (data) {
 socket.on('generateLine', function(data){
     $('#waitingRoom').addClass('hide');
     $('#game').removeClass('hide');
+    $('.container').addClass('reset');
     room.generateStation(data);
 });
 
@@ -259,4 +260,5 @@ socket.on('stopGame', function (data) {
     console.log(data);
     $('#game').addClass('hide');
     $('#scoreEndGame').removeClass('hide');
+    $('.container').removeClass('reset');
 });

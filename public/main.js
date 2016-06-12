@@ -100,9 +100,11 @@ function closeMenu(){
 
 function openMenu(){
     var _station = $(this).parent().data('id');
+    var _stationName = $(this).parent().data('name');
+    var _lineStation = $(this).parent().data('line');
     var _actionId = $(this).parent().data('actions');
     var _actionMenu = $('#actionMenu');
-    var _html = '<div class="customMenu"><div class="triangle"></div><ul>';
+    var _html = '<div class="triangle"></div><div class="customMenu"><p class="stationName">'+_stationName+'</p><p class="stationLine">'+_lineStation+'</p><ul>';
 
     if(user.role == 'disruptor'){
         _html += generateDisruptorMenu(_actionId, _station);

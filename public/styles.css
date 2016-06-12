@@ -203,21 +203,25 @@ p i.material-icons{
 .station[data-actions="6"] .buttonStation.animated{
     background-image: url('img/actionsIcons/bag.png');
 }
-.customMenu ul{
-    background-color: #FFF;
-    color: #2B3B8F;
+/* Menu Map */
+.customMenu{
+    position: absolute;
+    top: 55px;
+    left: -240%;
+    z-index: 40;
     width: 200px;
     padding: 5px;
+    background-color: #FFF;
     text-align: center;
-    left: -240%;
-    position: absolute;
-    z-index: 50;
-    box-shadow: 0px 2px 7px #000;
     font-weight: bold;
+    color: #2B3B8F;
+    box-shadow: 0px 2px 7px #000;
 }
 .customMenu li{
     list-style: none;
     padding: 3px;
+}
+.customMenu li + li{
     margin-bottom: 5px;
 }
 .customMenu li:hover{
@@ -227,9 +231,9 @@ p i.material-icons{
     width: 30px;
     height: 30px;
     background-color: #FFF;
-    top: 80%;
+    top: 42px;
     left: 10%;
-    z-index: 40;
+    z-index: 30;
     position: absolute;
     box-shadow: 2px 3px 7px #000;
     transform: rotate(45deg);
@@ -237,6 +241,14 @@ p i.material-icons{
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
+}
+.customMenu .stationName{
+    margin: 5px 0 0;
+    font-weight: bold;
+}
+.customMenu .stationLine{
+    margin-bottom: 7px;
+    border-bottom: 1px solid #ddd;
 }
 
 /*-------------------------------

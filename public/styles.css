@@ -179,6 +179,30 @@ p i.material-icons{
     background-color: rgba(255,255,255,0.5);
     cursor: pointer;
 }
+.buttonStation.animated{
+    box-shadow: 0px 3px 10px rgba(0,0,0,0.6);
+    background-color: #dc0d15;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.station[data-actions="1"] .buttonStation.animated{
+    background-image: url('img/actionsIcons/greve.png');
+}
+.station[data-actions="2"] .buttonStation.animated{
+    background-image: url('img/actionsIcons/signal.png');
+}
+.station[data-actions="3"] .buttonStation.animated{
+    background-image: url('img/actionsIcons/lama.png');
+}
+.station[data-actions="4"] .buttonStation.animated{
+    background-image: url('img/actionsIcons/aperitif.png');
+}
+.station[data-actions="5"] .buttonStation.animated{
+    background-image: url('img/actionsIcons/horse.png');
+}
+.station[data-actions="6"] .buttonStation.animated{
+    background-image: url('img/actionsIcons/bag.png');
+}
 .customMenu ul{
     background-color: #FFF;
     color: #2B3B8F;

@@ -203,6 +203,10 @@ socket.on('newAction', function (data) {
 
     var _message = data.user+' a provoqué '+data.action.name+' à '+data.station.name;
     notification(_message);
+    console.log(data);
+    //$(this).addClass('animated');
+    //var thisStation = $('.station').attr('data-name');
+    $('#'+data.station.id).addClass('animated pulse infinite');
 });
 
 socket.on('newReaction', function (data) {

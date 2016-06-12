@@ -17,6 +17,9 @@ var user = {
         this.availableAgent = agent;
         $('.availableAgent').text('Nombre d\'agents disponibles : '+agent);
         localforage.setItem('availableAgent', agent);
+        if(agent === null){ 
+            $('.availableAgent').css('display','none');
+        }
     },
     setRole: function(role){
         this.role = role;

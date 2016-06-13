@@ -27,7 +27,7 @@ module.exports = function (app) {
                         app.socket.io.to(_socket.activeRoom).emit('newAction', {
                             station: station,
                             action: action,
-                            user: _socket.pseudo
+                            user: _socket.pseudo,
                         });
                     }
                 })

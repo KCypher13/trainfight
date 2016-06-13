@@ -223,19 +223,24 @@ socket.on('newAction', function (data) {
 
     var _message = data.user+' a provoqué '+data.action.name+' à '+data.station.name;
     notification(_message);
-    $('#'+data.station.id+' .buttonStation').addClass('animated pulse infinite');
+    $('#'+data.station.id+' .buttonStation').addClass('animated pulse infinite '+data.action.class);
 });
 
 socket.on('newReaction', function (data) {
     room.reactionInProgress[data] = data;
+    $('#'+data+' .buttonStation').addClass('reactionInProgress');
 });
 
 socket.on('actionSolved', function (data) {
     room.actionInProgress[data.station.id] = data;
-    $('#'+data.station+ ' .buttonStation').removeClass('animated pulse infinite');
+    removeAllActionClass(data.station);
     delete room.actionInProgress[data.station];
     delete room.reactionInProgress[data.station]
 });
+
+function removeAllActionClass(station){
+    $('#'+station+ ' .buttonStation').removeClass('animated pulse infinite greve signal lama aperitif horse bag reactionInProgress');
+};
 
 socket.on('playersList', function (data) {
     room.manager = data.manager;

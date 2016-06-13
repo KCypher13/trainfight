@@ -143,6 +143,7 @@ module.exports = function (app) {
 
             for (key in _activeRoom.disruptors) {
                 var _disruptor = _activeRoom.disruptors[key];
+                _disruptor.actionPoint = 10;
                 app.socket.io.sockets.connected[_disruptor.socketId].emit('changeActionPoint', _disruptor.actionPoint);
             }
 

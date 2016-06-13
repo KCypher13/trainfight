@@ -7,6 +7,11 @@ var room = {
     actionInProgress:{},
     reactionInProgress:{},
     reactionUsed: null,
+    reInit: function(){
+        this.actionInProgress = {};
+        this.reactionInProgress = {};
+        this.reactionUsed = null;
+    },
     joinRoom: function (roomName, userData) {
         var _userData = (userData)? userData : null;
         this.name = roomName;
@@ -22,7 +27,7 @@ var room = {
         }
         if(!jQuery.isEmptyObject(this.disruptors)){
             $('#waitingPlayers').addClass('hide');
-            $('#startGame').removeAttr('disabled');
+            $('.startGame').removeAttr('disabled');
         } 
     },
     generateStation: function(lines){

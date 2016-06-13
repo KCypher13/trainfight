@@ -202,19 +202,11 @@ $(function () {
     checkUrl();
     $('#createRoom').click(createRoom);
 
-    $(document).mousedown(function (e)
-    {
-        var container = $("#actionMenu");
-        if (!container.is(e.target) // if the target of the click isn't the container...
-            && container.has(e.target).length === 0) // ... nor a descendant of the container
-        {
-            closeMenu();
-        }
-    });
+
 
     $('body').on('click', '.station .buttonStation', openMenu);
     $('#joinGame').click(setPseudo);
-    $('#startGame').click(startGame);
+    $('.startGame').click(startGame);
     $('body').on('click', '.action', sendAction);
     $('body').on('click', '.reaction', sendReaction);
 
@@ -262,11 +254,13 @@ socket.on('playersList', function (data) {
 
 socket.on('generateLine', function(data){
     $('#waitingRoom').addClass('hide');
+    $('#scoreEndGame').addClass('hide');
     $('#game').removeClass('hide');
     $('.container').addClass('reset');
     var heightHeaderMap = initializeHeaderMap();
     $('#mapGame').css('padding-top', heightHeaderMap+20);
     room.generateStation(data);
+    room.reInit();
 });
 
 socket.on('hydrateActions', function(actions){

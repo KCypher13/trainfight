@@ -66,7 +66,7 @@ module.exports = function(app){
             }
             else if(app.socket.io.sockets.adapter.rooms[data.room].length > 1){
                 this.manager = false;
-                app.socket.io.to(data).emit('playersList', {manager:app.socket.io.sockets.adapter.rooms[data.room].manager.pseudo, disruptors: app.socket.io.sockets.adapter.rooms[data.room].disruptors})
+                app.socket.io.to(data.room).emit('playersList', {manager:app.socket.io.sockets.adapter.rooms[data.room].manager.pseudo, disruptors: app.socket.io.sockets.adapter.rooms[data.room].disruptors})
             }
             else{
                 this.manager = true;

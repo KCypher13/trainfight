@@ -19,7 +19,10 @@ var room = {
         for(key in this.disruptors){
             $('.disruptors').append('<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-avatar">person</i><span>'+this.disruptors[key].pseudo+'</span></span></li>')
         }
-        if(!jQuery.isEmptyObject(this.disruptors)) $('#waitingPlayers').addClass('hide');
+        if(!jQuery.isEmptyObject(this.disruptors)){
+            $('#waitingPlayers').addClass('hide');
+            $('#startGame').removeAttr('disabled');
+        } 
     },
     generateStation: function(lines){
         var heightHeaderMap = initializeHeaderMap();

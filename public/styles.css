@@ -251,6 +251,10 @@ p i.material-icons{
     border-bottom: 1px solid #ddd;
 }
 
+.action.disable, .reaction.disable{
+    opacity: 0.3;
+}
+
 /*-------------------------------
 == Responsive
 -------------------------------*/

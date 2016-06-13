@@ -65,8 +65,10 @@ module.exports = function (app) {
                         _gravity = _actionTarget.gravity;
                         _resolutionTime = _gravity / reaction.efficiency;
                         _activeRoom.manager.reactionUsed[reaction.id] = true;
+                        _socket.emit('reactionUsed', _activeRoom.manager.reactionUsed[reaction.id]);
                         setTimeout (function(){
                             _activeRoom.manager.reactionUsed[reaction.id] = false;
+                            _socket.emit('reactionUsed', _activeRoom.manager.reactionUsed[reaction.id]);
                         }, reaction.recoveryTime*1000);
                         setTimeout(function () {
                             app.room.solveAction(_activeRoom, data.station, _activeRoomName)

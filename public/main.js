@@ -126,13 +126,25 @@ function generateDisruptorMenu(actionId, stationId){
     }
     else if(actionId){
         if(actionId.length>1){
-            var _actionsArray = _actionId.split(',');
+            var _actionsArray = actionId.split(',');
             for(key in _actionsArray){
-                _html += '<li class="action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
+
+                if(room.actions[_actionsArray[key]].cost > user.actionPoint){
+                    _html += '<li class="action disable" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
+                }
+                else{
+                    _html += '<li class="action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
+                }
+
             }
         }
         else{
-            _html += '<li class="action" data-id="'+actionId+'">'+room.actions[actionId].name+'</li>';
+            if(rroom.actions[actionId].cost > user.actionPoint) {
+                _html += '<li class="action disable" data-id="' + actionId + '">' + room.actions[actionId].name + '</li>';
+            }
+            else{
+                _html += '<li class="action" data-id="' + actionId + '">' + room.actions[actionId].name + '</li>';
+            }
         }
 
     }
@@ -149,12 +161,18 @@ function generateManagerMenu(stationId){
             var _reaction = room.reactions[key];
 
             if(_reaction.actions.indexOf(room.actionInProgress[stationId].action.id) >-1){
-                _html += '<li class="reaction" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+                if(room.reactionUsed && room.reactionUsed[room.actionInProgress[stationId].action.id]){
+                    _html += '<li class="reaction disable" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+                }
+                else{
+                    _html += '<li class="reaction" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+                }
+
             }
         }
 
     }else{
-        _html += "tout vas bien";
+        _html += "Tout vas bien";
     }
     return _html;
 }
@@ -266,7 +284,7 @@ socket.on('role', function(data){
 
 socket.on('notification', notification);
 
-
+socket.on('reactionUsed', room.setReactionUsed);
 
 socket.on('stopGame', function (data) {
     console.log(data);

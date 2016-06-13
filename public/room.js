@@ -6,6 +6,7 @@ var room = {
     reactions :{},
     actionInProgress:{},
     reactionInProgress:{},
+    reactionUsed: null,
     joinRoom: function (roomName, userData) {
         var _userData = (userData)? userData : null;
         this.name = roomName;
@@ -57,5 +58,8 @@ var room = {
         this.satisfaction = satisfaction;
         $('.satisfaction').text(satisfaction/100+'%');
         document.querySelector('#progressBar').MaterialProgress.setProgress(satisfaction/100);
+    },
+    setReactionUsed: function(reactionUsed){
+        this.reactionUsed = reactionUsed;
     }
 };

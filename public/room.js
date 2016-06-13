@@ -45,7 +45,7 @@ var room = {
                     }
                     _html += '"';
                 }
-                _html += ' style="top:'+((_station.locationY+heightHeaderMap)-23)*0.7+'px;left:'+(_station.locationX-22)*0.7+'px">';
+                _html += ' style="top:'+(_station.locationY+heightHeaderMap+20)*0.7+'px;left:'+(_station.locationX-22)*0.7+'px">';
                 _html += '<div class="markerProgress hide"><p>100%</p></div>';
                 _html += '<p class="buttonStation">'+_station.name+'</p>';
                 _html += '</div>';

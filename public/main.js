@@ -116,7 +116,6 @@ function openMenu(){
 
     closeMenu();
     $(this).parent().append(_html);
-
 }
 
 function generateDisruptorMenu(actionId, stationId){
@@ -202,11 +201,24 @@ function initializeHeaderMap(){
 $(function () {
     checkUrl();
     $('#createRoom').click(createRoom);
+
+    $(document).mousedown(function (e)
+    {
+        var container = $("#actionMenu");
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0) // ... nor a descendant of the container
+        {
+            closeMenu();
+        }
+    });
+
     $('body').on('click', '.station .buttonStation', openMenu);
     $('#joinGame').click(setPseudo);
     $('#startGame').click(startGame);
     $('body').on('click', '.action', sendAction);
     $('body').on('click', '.reaction', sendReaction);
+
+
 
 
     new Clipboard('.shareLink', {

@@ -205,9 +205,9 @@ p i.material-icons{
     background-image: url('img/actionsIcons/bag.png');
 }
 /* Menu Map */
-.customMenu{
+.menuContent{
     position: absolute;
-    top: 95px;
+    top: 57px;
     left: -240%;
     z-index: 50;
     width: 200px;

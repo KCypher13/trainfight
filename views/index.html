@@ -28,11 +28,12 @@
             <section class="mdl-layout__content">
                 <section id="connexion" class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
-                        <h1>Trainfight</h1>
+                        <h1>Trainfight <img src="/static/img/logo_train_fight.svg"></h1>
                     </div>
                     <div class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-cell--4-col-phone">
-                        <p>Ici le texte descriptif rapide de cette super application qu’on va tous adorer ! Lorem ipsum sit dolor
-                            amet</p>
+                        <p>Et si vous prenez votre revanche sur les transports ?</p>
+                        <p>D'un côté les contrôleurs pour gérer au mieux les crises, de l'autre les perturbateurs pour les déclencher !</p>
+                        <p>A vous de jouer !</p>
                         <h2>Créer une room</h2>
                         <form>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -69,8 +70,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
-                                icone éclair
+                            <div class="thunderbolt mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
                             </div>
                             <div class="players disruptorsPlayers mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col mdl-cell--4-col-phone">
                                 <h3>Le(s) perturbateur(s)</h3>
@@ -97,7 +97,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div id="joiner" class="hide">
+                                <div id="joiner" class="hide mdl-cell--4-col mdl-cell--4-offset">
                                     <h2>Rejoindre la room</h2>
                                     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                         <input class="mdl-textfield__input" type="text" id="pseudo"/>
@@ -145,31 +145,42 @@
                         <button class="mdl-snackbar__action" type="button"></button>
                     </div>
                 </section>
+                <!-- -->
                 <section id="scoreEndGame" class="hide">
-                    <h2>Partie terminée !</h2>
-                    <p>lorem ipsum sit dolor amet</p>
-                    <div class="playersList">
-                        <h3>Le contrôleur</h3>
-                        <ul class="demo-list-action mdl-list">
-                            <li class="mdl-list__item">
-                                <span class="mdl-list__item-primary-content">
-                                    <i class="material-icons mdl-list__item-avatar">person</i>
-                                    <span class="manager"></span>
-                                </span>
-                                <span class="mdl-list__item-secondary-action">
-                                    picto
-                                </span>
-                            </li>
-                        </ul>
-                        <h3>Le(s) perturbateur(s)</h3>
-                        <ul class="disruptors" class="demo-list-action mdl-list">
-                            <li class="mdl-list__item">
-                                <span class="mdl-list__item-primary-content">
-                                    <i class="material-icons mdl-list__item-avatar">person</i>
-                                    <span>Nom du joueur</span>
-                                </span>
-                            </li>
-                        </ul>
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col mdl-cell--4-col-phone">
+                            <h2>Partie terminée !</h2>
+                        </div>
+                    </div>
+                    <div class="mdl-grid">
+                        <div class="players managerPlayer mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col mdl-cell--4-col-phone">
+                            <h3>Le contrôleur</h3>
+                            <ul class="demo-list-action mdl-list">
+                                <li class="firstItem mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">Joueur</span>
+                                    <span class="mdl-list__item-secondary-content">Temps passé</span>
+                                </li>
+                                <li class="mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons mdl-list__item-avatar">person</i>
+                                        <span class="manager"></span>
+                                    </span>
+                                    <span class="mdl-list__item-secondary-content gameTime">Temps passé</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="thunderbolt mdl-cell mdl-cell--2-col mdl-cell--4-col-phone">
+                        </div>
+                        <div class="players disruptorsPlayers mdl-card mdl-shadow--2dp mdl-cell mdl-cell--5-col mdl-cell--4-col-phone">
+                            <h3>Le(s) perturbateur(s)</h3>
+                            <ul class="disruptors" class="demo-list-action mdl-list">
+                                <li class="firstItem mdl-list__item">
+                                    <span class="mdl-list__item-primary-content">Joueur</span>
+                                    <span class="mdl-list__item-secondary-content">Points</span>
+                                </li>
+
+                            </ul>
+                        </div>
                     </div>
                 </section>
             </section>

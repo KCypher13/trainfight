@@ -1,6 +1,9 @@
 /*-------------------------------
 == COMMON
 -------------------------------*/
+body{
+    background: url('img/background.png') center no-repeat;
+}
 body > .mdl-grid:first-child{
     padding: 0;
 }
@@ -21,6 +24,7 @@ body > .container{
 h2, h3{
     text-align: center;
     font-weight: bold;
+    color: #444;
 }
 h2{
     margin-bottom: 0;
@@ -61,15 +65,24 @@ header a{
     /*background: url('img/map.png') top center no-repeat;*/
 }
 #connexion .mdl-card{
-    margin: 0;
+    margin: 10% 0 0;
+    padding: 50px 40px 40px;
+}
+#connexion .mdl-card p{
+    margin-bottom: 5px;
+    text-align: center;
 }
 .mdl-card{
     padding: 20px;
 }
 h1{
-    height: 160px;
-    background: url('img/logo_train_fight.svg') center no-repeat;
+    /*height: 160px;
+    background: url('img/logo_train_fight.svg') center no-repeat;*/
     font-size: 0;
+    text-align: center;
+}
+h1 img{
+    height: 450px;
 }
 
 /*-------------------------------
@@ -83,12 +96,30 @@ ul.demo-list-action, ul{
     text-align: center;
 }
 p i.material-icons{
-    font-size: 5em;
+    margin-left: 15px;
+    padding-bottom: 10px;
+    font-size: 2em;
     color: #00AA90;
 }
 .playersList .mdl-list__item{
     padding: 10px 16px;
     border-bottom: 1px solid #eee;
+}
+.playersList .thunderbolt{
+    background: url('img/thunderbolt.png') center no-repeat;
+}
+#waitingRoom h2, #scoreEndGame h2{
+    color: #fff;
+}
+#joiner .mdl-textfield{
+    width: 100%;
+}
+#joiner .mdl-textfield input{
+    border-bottom: 1px solid rgba(255,255,255,1);
+    color: #fff;
+}
+#joiner .mdl-textfield label{
+    color: rgba(255,255,255,1);
 }
 /*.players li{
     background-position: center left;
@@ -251,6 +282,19 @@ p i.material-icons{
     margin-bottom: 7px;
     border-bottom: 1px solid #ddd;
 }
+
+/*-------------------------------
+== #SCOREENDGAME
+-------------------------------*/
+.mdl-list__item.firstItem{
+    padding: 0px 15px;
+    border-bottom: 2px solid #ddd;
+}
+.mdl-list__item-secondary-content p{
+    margin: 0;
+    font-size: 1.143em;
+}
+
 
 /*-------------------------------
 == Responsive

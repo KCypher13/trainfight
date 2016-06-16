@@ -273,4 +273,10 @@ socket.on('stopGame', function (data) {
     $('#game').addClass('hide');
     $('#scoreEndGame').removeClass('hide');
     $('.container').removeClass('reset');
+    $('.gameTime').text(data.gameTime);
+    for(key in data.disruptors){
+        $('#scoreEndGame .'+data.disruptors[key].id+' .score').text(data.disruptors[key].score)
+    }
+    console.log(data.disruptors[key].score);
+
 });

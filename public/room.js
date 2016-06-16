@@ -17,7 +17,7 @@ var room = {
 
         $('.manager').text(this.manager);
         for(key in this.disruptors){
-            $('.disruptors').append('<li class="mdl-list__item"><span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-avatar">person</i><span>'+this.disruptors[key].pseudo+'</span></span></li>')
+            $('.disruptors').append('<li class="mdl-list__item '+this.disruptors[key].socketId+'"><span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-avatar">person</i><span>'+this.disruptors[key].pseudo+'</span></span><span class="mdl-list__item-secondary-content score"></span></li>')
         }
         if(!jQuery.isEmptyObject(this.disruptors)){
             $('#waitingPlayers').addClass('hide');
@@ -45,7 +45,7 @@ var room = {
                     }
                     _html += '"';
                 }
-                _html += ' style="top:'+(_station.locationY+heightHeaderMap+20)*0.7+'px;left:'+(_station.locationX-22)*0.7+'px">';
+                _html += ' style="top:'+(_station.locationY+heightHeaderMap+30)*0.7+'px;left:'+(_station.locationX-22)*0.7+'px">';
                 _html += '<div class="markerProgress hide"><p>100%</p></div>';
                 _html += '<p class="buttonStation">'+_station.name+'</p>';
                 _html += '</div>';

@@ -138,7 +138,7 @@ function generateDisruptorMenu(actionId, stationId){
             }
         }
         else{
-            if(rroom.actions[actionId].cost > user.actionPoint) {
+            if(room.actions[actionId].cost > user.actionPoint) {
                 _html += '<li class="action disable" data-id="' + actionId + '">' + room.actions[actionId].name + '</li>';
             }
             else{

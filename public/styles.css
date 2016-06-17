@@ -238,14 +238,17 @@ p i.material-icons{
 
 .reactionInProgress:before{
     content: '';
-    width: 30px;
-    height: 38px;
-    background: url('img/ratp.svg') top left no-repeat;
-    background-size: cover;
+    width: 55px;
+    height: 51px;
+    background: url('img/ratp.svg') center no-repeat #4fb9ae;
+    background-size: 55%;
     position: absolute;
     display: block;
-    top: -30px;
-    left: -30px;
+    top: -35px;
+    left: -40px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
 }
 
 /* Menu Map */

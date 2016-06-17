@@ -217,24 +217,37 @@ p i.material-icons{
     background-position: center;
     background-repeat: no-repeat;
 }
-.station[data-actions="1"] .buttonStation.animated{
+.greve{
     background-image: url('img/actionsIcons/greve.png');
 }
-.station[data-actions="2"] .buttonStation.animated{
+.signal{
     background-image: url('img/actionsIcons/signal.png');
 }
-.station[data-actions="3"] .buttonStation.animated{
+.lama{
     background-image: url('img/actionsIcons/lama.png');
 }
-.station[data-actions="4"] .buttonStation.animated{
+.aperitif{
     background-image: url('img/actionsIcons/aperitif.png');
 }
-.station[data-actions="5"] .buttonStation.animated{
+.horse{
     background-image: url('img/actionsIcons/horse.png');
 }
-.station[data-actions="6"] .buttonStation.animated{
+.bag{
     background-image: url('img/actionsIcons/bag.png');
 }
+
+.reactionInProgress:before{
+    content: '';
+    width: 30px;
+    height: 38px;
+    background: url('img/ratp.svg') top left no-repeat;
+    background-size: cover;
+    position: absolute;
+    display: block;
+    top: -30px;
+    left: -30px;
+}
+
 /* Menu Map */
 .customMenu{
     position: absolute;
@@ -281,6 +294,10 @@ p i.material-icons{
 .customMenu .stationLine{
     margin-bottom: 7px;
     border-bottom: 1px solid #ddd;
+}
+
+.action.disable, .reaction.disable{
+    opacity: 0.3;
 }
 
 /*-------------------------------

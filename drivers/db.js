@@ -33,7 +33,7 @@ module.exports = function (app) {
         getActionsFromStations: function (stations, cb) {
             var stationsWithActions = {};
             async.forEachOf(stations, function (value, key, callback) {
-                app.db.connector.query('SELECT actionId FROM stationAction WHERE stationId = ?', value.id, function (err, rows, fields) {
+                app.db.connector.query('SELECT actionId FROM stationAction WHERE stationId = ? ORDER BY actionId', value.id, function (err, rows, fields) {
                     if (err) throw err;
                     var refactedRows = [];
                     for (key in rows) {

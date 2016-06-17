@@ -17,12 +17,15 @@ var user = {
         this.availableAgent = agent;
         $('.availableAgent').text('Nombre d\'agents disponibles : '+agent);
         localforage.setItem('availableAgent', agent);
-        if(agent === null){ 
-            $('.availableAgent').css('display','none');
-        }
     },
     setRole: function(role){
         this.role = role;
+        if(role == "manager"){
+            $('.actionPoint').css('display','none');
+        }
+        else{
+            $('.availableAgent').css('display','none');
+        }
         localforage.setItem('role', role);
         localforage.setItem('socketId', socket.id);
     }

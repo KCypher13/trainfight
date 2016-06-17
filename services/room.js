@@ -27,7 +27,7 @@ module.exports = function (app) {
                         app.socket.io.to(_socket.activeRoom).emit('newAction', {
                             station: station,
                             action: action,
-                            user: _socket.pseudo
+                            user: _socket.pseudo,
                         });
                     }
                 })
@@ -48,7 +48,7 @@ module.exports = function (app) {
                 if (!reaction.asRecovery) {
                     if (_manager.availableAgent >= data.nbAgents) {
                         _gravity = _actionTarget.gravity;
-                        _resolutionTime = _gravity / data.nbAgents * 3000;
+                        _resolutionTime = _gravity / data.nbAgents * 5000;
                         _actionTarget.agents = data.nbAgents;
                         _activeRoom.manager.availableAgent = _manager.availableAgent - data.nbAgents;
                         _socket.emit('changeAvailableAgent', _activeRoom.manager.availableAgent);
@@ -65,8 +65,10 @@ module.exports = function (app) {
                         _gravity = _actionTarget.gravity;
                         _resolutionTime = _gravity / reaction.efficiency;
                         _activeRoom.manager.reactionUsed[reaction.id] = true;
+                        _socket.emit('reactionUsed', _activeRoom.manager.reactionUsed[reaction.id]);
                         setTimeout (function(){
                             _activeRoom.manager.reactionUsed[reaction.id] = false;
+                            _socket.emit('reactionUsed', _activeRoom.manager.reactionUsed[reaction.id]);
                         }, reaction.recoveryTime*1000);
                         setTimeout(function () {
                             app.room.solveAction(_activeRoom, data.station, _activeRoomName)
@@ -84,7 +86,7 @@ module.exports = function (app) {
             var _action = _activeRoom.actionInProgress[station];
             var _dateNow = Date.now();
             var _scoring = Math.round((_dateNow - _action.startTime) / 1000);
-            var _newPoint = (Math.round((_dateNow - _action.startTime) / 800) + parseInt(_activeRoom.disruptors[_action.user].actionPoint) >= 10) ? Math.round((_dateNow - _action.startTime)/ 800)+parseInt(_activeRoom.disruptors[_action.user].actionPoint) : 10;
+            var _newPoint = (Math.round((_dateNow - _action.startTime) / 600) + parseInt(_activeRoom.disruptors[_action.user].actionPoint) >= 10) ? Math.round((_dateNow - _action.startTime)/ 800)+parseInt(_activeRoom.disruptors[_action.user].actionPoint) : 10;
 
             if (_action.agents) {
                 _activeRoom.manager.availableAgent = _activeRoom.manager.availableAgent + parseInt(_action.agents);

@@ -121,7 +121,7 @@ function openMenu(){
 function generateDisruptorMenu(actionId, stationId){
     var _html = "";
     if(room.actionInProgress[stationId]){
-        _html += "operation en cours";
+        _html += "Opération en cours";
     }
     else if(actionId){
         if(actionId.length>1){
@@ -153,7 +153,7 @@ function generateDisruptorMenu(actionId, stationId){
 function generateManagerMenu(stationId){
     var _html = "";
     if(room.reactionInProgress[stationId]){
-        _html += "operation en cours";
+        _html += "Opération en cours";
     }
    else if(room.actionInProgress[stationId]){
         for(key in room.reactions){
@@ -171,7 +171,7 @@ function generateManagerMenu(stationId){
         }
 
     }else{
-        _html += "Tout vas bien";
+        _html += "Tout va bien";
     }
     return _html;
 }

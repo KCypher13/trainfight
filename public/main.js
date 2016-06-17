@@ -230,7 +230,7 @@ socket.on('generateLine', function(data){
     $('#game').removeClass('hide');
     $('.container').addClass('reset');
     var heightHeaderMap = initializeHeaderMap();
-    $('#mapGame').css('padding-top', heightHeaderMap+20);
+    $('#mapGame').css('padding-top', heightHeaderMap+15);
     room.generateStation(data);
 });
 
@@ -278,6 +278,4 @@ socket.on('stopGame', function (data) {
         var _disruptorId = (data.disruptors[key].socketId).replace('/#','');
         $('#scoreEndGame .'+_disruptorId+' .score').text(data.disruptors[key].score)
     }
-    console.log(data.disruptors[key].score);
-
 });

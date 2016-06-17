@@ -53,6 +53,10 @@ var room = {
             }
         }
         $('.mapLine').html(_html);
+
+        if(user.role == 'disruptor'){
+            $('.availableAgent').addClass('hide');
+        }
     },
     setSatisfaction: function(satisfaction){
         this.satisfaction = satisfaction;

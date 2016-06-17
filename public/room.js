@@ -17,7 +17,8 @@ var room = {
 
         $('.manager').text(this.manager);
         for(key in this.disruptors){
-            $('.disruptors').append('<li class="mdl-list__item '+this.disruptors[key].socketId+'"><span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-avatar">person</i><span>'+this.disruptors[key].pseudo+'</span></span><span class="mdl-list__item-secondary-content score"></span></li>')
+            var _disruptorId = (this.disruptors[key].socketId).replace('/#', '');
+            $('.disruptors').append('<li class="mdl-list__item '+_disruptorId+'"><span class="mdl-list__item-primary-content"><i class="material-icons mdl-list__item-avatar">person</i><span>'+this.disruptors[key].pseudo+'</span></span><span class="mdl-list__item-secondary-content score"></span></li>')
         }
         if(!jQuery.isEmptyObject(this.disruptors)){
             $('#waitingPlayers').addClass('hide');

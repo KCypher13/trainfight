@@ -275,7 +275,8 @@ socket.on('stopGame', function (data) {
     $('.container').removeClass('reset');
     $('.gameTime').text(data.gameTime);
     for(key in data.disruptors){
-        $('#scoreEndGame .'+data.disruptors[key].id+' .score').text(data.disruptors[key].score)
+        var _disruptorId = (data.disruptors[key].socketId).replace('/#','');
+        $('#scoreEndGame .'+_disruptorId+' .score').text(data.disruptors[key].score)
     }
     console.log(data.disruptors[key].score);
 

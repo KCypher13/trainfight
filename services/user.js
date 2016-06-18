@@ -30,6 +30,7 @@ module.exports = function(app){
             var _activeRoom = app.socket.io.sockets.adapter.rooms[data.room];
             if(data.userData){
                 var _oldSocket = '/#'+data.userData.socketId;
+                app.socket.io.to(data.room).emit('playersList', {manager:app.socket.io.sockets.adapter.rooms[data.room].manager.pseudo, disruptors: app.socket.io.sockets.adapter.rooms[data.room].disruptors});
                 if(data.userData.role == "manager"){
                     _activeRoom.manager.socketId = _socket.id
                 }

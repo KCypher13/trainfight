@@ -69,14 +69,14 @@ function createRoom(e) {
 }
 
 function sendAction() {
-    var _station = $(this).parent().parent().parent().data('id');
+    var _station = $(this).data('station');
     var _action = $(this).data('id');
     socket.emit('createAction', {'station': _station, 'action': _action});
     closeMenu();
 }
 
 function sendReaction(){
-    var _station = $(this).parent().parent().parent().data('id');
+    var _station = $(this).data('station');
     var _reaction = room.reactions[$(this).data('id')];
     if(!_reaction.asRecovery){
         var _nbAgent = prompt('combien d\'agent à envoyer ?');
@@ -129,20 +129,20 @@ function generateDisruptorMenu(actionId, stationId){
             for(key in _actionsArray){
 
                 if(room.actions[_actionsArray[key]].cost > user.actionPoint){
-                    _html += '<li class="action disable" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
+                    _html += '<li class="action disable" data-station="'+stationId+'" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
                 }
                 else{
-                    _html += '<li class="action" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
+                    _html += '<li class="action" data-station="'+stationId+'" data-id="'+_actionsArray[key]+'">'+room.actions[_actionsArray[key]].name+'</li>';
                 }
 
             }
         }
         else{
             if(room.actions[actionId].cost > user.actionPoint) {
-                _html += '<li class="action disable" data-id="' + actionId + '">' + room.actions[actionId].name + '</li>';
+                _html += '<li class="action disable" data-station="'+stationId+'" data-id="' + actionId + '">' + room.actions[actionId].name + '</li>';
             }
             else{
-                _html += '<li class="action" data-id="' + actionId + '">' + room.actions[actionId].name + '</li>';
+                _html += '<li class="action" data-station="'+stationId+'" data-id="' + actionId + '">' + room.actions[actionId].name + '</li>';
             }
         }
 
@@ -161,10 +161,10 @@ function generateManagerMenu(stationId){
 
             if(_reaction.actions.indexOf(room.actionInProgress[stationId].action.id) >-1){
                 if(room.reactionUsed && room.reactionUsed[room.actionInProgress[stationId].action.id]){
-                    _html += '<li class="reaction disable" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+                    _html += '<li class="reaction disable" data-station="'+stationId+'" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
                 }
                 else{
-                    _html += '<li class="reaction" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
+                    _html += '<li class="reaction" data-station="'+stationId+'" data-id="'+_reaction.id+'">'+_reaction.name+'</li>';
                 }
 
             }

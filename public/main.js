@@ -104,7 +104,7 @@ function openMenu(){
     var _lineStation = $(this).parent().data('line');
     var _actionId = $(this).parent().data('actions');
     var _actionMenu = $('#actionMenu');
-    var _html = '<div class="triangle"></div><div class="customMenu"><p class="stationName">'+_stationName+'</p><p class="stationLine">'+_lineStation+'</p><ul>';
+    var _html = '<div class="customMenu"><div class="triangle"></div><div class="menuContent"><p class="stationName">'+_stationName+'</p><p class="stationLine">'+_lineStation+'</p><ul>';
 
     if(user.role == 'disruptor'){
         _html += generateDisruptorMenu(_actionId, _station);
@@ -112,7 +112,7 @@ function openMenu(){
     else{
        _html +=  generateManagerMenu(_station);
     }
-    _html += "</ul></div>";
+    _html += "</ul></div></div>";
 
     closeMenu();
     $(this).parent().append(_html);
@@ -121,7 +121,7 @@ function openMenu(){
 function generateDisruptorMenu(actionId, stationId){
     var _html = "";
     if(room.actionInProgress[stationId]){
-        _html += "operation en cours";
+        _html += "Opération en cours";
     }
     else if(actionId){
         if(actionId.length>1){
@@ -138,7 +138,7 @@ function generateDisruptorMenu(actionId, stationId){
             }
         }
         else{
-            if(rroom.actions[actionId].cost > user.actionPoint) {
+            if(room.actions[actionId].cost > user.actionPoint) {
                 _html += '<li class="action disable" data-id="' + actionId + '">' + room.actions[actionId].name + '</li>';
             }
             else{
@@ -153,7 +153,7 @@ function generateDisruptorMenu(actionId, stationId){
 function generateManagerMenu(stationId){
     var _html = "";
     if(room.reactionInProgress[stationId]){
-        _html += "operation en cours";
+        _html += "Opération en cours";
     }
    else if(room.actionInProgress[stationId]){
         for(key in room.reactions){
@@ -171,7 +171,7 @@ function generateManagerMenu(stationId){
         }
 
     }else{
-        _html += "Tout vas bien";
+        _html += "Tout va bien";
     }
     return _html;
 }
@@ -258,7 +258,7 @@ socket.on('generateLine', function(data){
     $('#game').removeClass('hide');
     $('.container').addClass('reset');
     var heightHeaderMap = initializeHeaderMap();
-    $('#mapGame').css('padding-top', heightHeaderMap+20);
+    $('#mapGame').css('padding-top', heightHeaderMap+15);
     room.generateStation(data);
     room.reInit();
 });
@@ -302,4 +302,9 @@ socket.on('stopGame', function (data) {
     $('#game').addClass('hide');
     $('#scoreEndGame').removeClass('hide');
     $('.container').removeClass('reset');
+    $('.gameTime').text(data.gameTime);
+    for(key in data.disruptors){
+        var _disruptorId = (data.disruptors[key].socketId).replace('/#','');
+        $('#scoreEndGame .'+_disruptorId+' .score').text(data.disruptors[key].score)
+    }
 });

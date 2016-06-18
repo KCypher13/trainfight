@@ -1,6 +1,9 @@
 /*-------------------------------
 == COMMON
 -------------------------------*/
+body{
+    background: url('img/background.png') center no-repeat;
+}
 body > .mdl-grid:first-child{
     padding: 0;
 }
@@ -21,6 +24,7 @@ body > .container{
 h2, h3{
     text-align: center;
     font-weight: bold;
+    color: #444;
 }
 h2{
     margin-bottom: 0;
@@ -61,15 +65,24 @@ header a{
     /*background: url('img/map.png') top center no-repeat;*/
 }
 #connexion .mdl-card{
-    margin: 0;
+    margin: 10% 0 0;
+    padding: 50px 40px 40px;
+}
+#connexion .mdl-card p{
+    margin-bottom: 5px;
+    text-align: center;
 }
 .mdl-card{
     padding: 20px;
 }
 h1{
-    height: 160px;
-    background: url('img/logo_train_fight.svg') center no-repeat;
+    /*height: 160px;
+    background: url('img/logo_train_fight.svg') center no-repeat;*/
     font-size: 0;
+    text-align: center;
+}
+h1 img{
+    height: 450px;
 }
 
 /*-------------------------------
@@ -83,12 +96,30 @@ ul.demo-list-action, ul{
     text-align: center;
 }
 p i.material-icons{
-    font-size: 5em;
+    margin-left: 15px;
+    padding-bottom: 10px;
+    font-size: 2em;
     color: #00AA90;
 }
 .playersList .mdl-list__item{
     padding: 10px 16px;
     border-bottom: 1px solid #eee;
+}
+.playersList .thunderbolt{
+    background: url('img/thunderbolt.png') center no-repeat;
+}
+#waitingRoom h2, #scoreEndGame h2{
+    color: #fff;
+}
+#joiner .mdl-textfield{
+    width: 100%;
+}
+#joiner .mdl-textfield input{
+    border-bottom: 1px solid rgba(255,255,255,1);
+    color: #fff;
+}
+#joiner .mdl-textfield label{
+    color: rgba(255,255,255,1);
 }
 /*.players li{
     background-position: center left;
@@ -168,6 +199,7 @@ p i.material-icons{
     position: absolute;
 }
 .buttonStation {
+    position: relative;
     background-color: #FFF;
     border: 3px solid #000;
     width: 30px;
@@ -206,22 +238,25 @@ p i.material-icons{
 
 .reactionInProgress:before{
     content: '';
-    width: 30px;
-    height: 38px;
-    background: url('img/ratp.svg') top left no-repeat;
-    background-size: cover;
+    width: 55px;
+    height: 51px;
+    background: url('img/ratp.svg') center no-repeat #4fb9ae;
+    background-size: 55%;
     position: absolute;
     display: block;
-    top: -30px;
-    left: -30px;
+    top: -35px;
+    left: -40px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
 }
 
 /* Menu Map */
-.customMenu{
+.menuContent{
     position: absolute;
-    top: 55px;
+    top: 57px;
     left: -240%;
-    z-index: 40;
+    z-index: 50;
     width: 200px;
     padding: 5px;
     background-color: #FFF;
@@ -244,9 +279,9 @@ p i.material-icons{
     width: 30px;
     height: 30px;
     background-color: #FFF;
-    top: 42px;
+    top: 80%;
     left: 10%;
-    z-index: 30;
+    z-index: 40;
     position: absolute;
     box-shadow: 2px 3px 7px #000;
     transform: rotate(45deg);
@@ -267,6 +302,19 @@ p i.material-icons{
 .action.disable, .reaction.disable{
     opacity: 0.3;
 }
+
+/*-------------------------------
+== #SCOREENDGAME
+-------------------------------*/
+.mdl-list__item.firstItem{
+    padding: 0px 15px;
+    border-bottom: 2px solid #ddd;
+}
+.mdl-list__item-secondary-content p{
+    margin: 0;
+    font-size: 1.143em;
+}
+
 
 /*-------------------------------
 == Responsive

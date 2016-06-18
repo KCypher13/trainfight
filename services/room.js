@@ -164,7 +164,7 @@ module.exports = function (app) {
                 app.socket.io.to(activeRoomName).emit('changeSatisfaction', _activeRoom.satisfaction);
             }
             else {
-                var _gameTime = (Date.now() - _activeRoom.startTime) / 1000;
+                var _gameTime = Math.round((Date.now() - _activeRoom.startTime) / 1000);
                 app.socket.io.to(activeRoomName).emit('stopGame', {
                     disruptors: _activeRoom.disruptors,
                     gameTime: _gameTime

@@ -302,7 +302,7 @@ socket.on('stopGame', function (data) {
     $('#game').addClass('hide');
     $('#scoreEndGame').removeClass('hide');
     $('.container').removeClass('reset');
-    $('.gameTime').text(data.gameTime);
+    $('.gameTime').text(data.gameTime+' s');
     for(key in data.disruptors){
         var _disruptorId = (data.disruptors[key].socketId).replace('/#','');
         $('#scoreEndGame .'+_disruptorId+' .score').text(data.disruptors[key].score)

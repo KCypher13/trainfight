@@ -158,7 +158,7 @@ module.exports = function (app) {
             var _actionsInProgress = _activeRoom.actionInProgress;
             for (key in _actionsInProgress) {
                 var _action = _actionsInProgress[key];
-                _activeRoom.satisfaction = Math.round(_activeRoom.satisfaction - (_action.visitors / 3));
+                _activeRoom.satisfaction = Math.round(_activeRoom.satisfaction - (_action.visitors / 20));
             }
             if (_activeRoom.satisfaction > 0) {
                 app.socket.io.to(activeRoomName).emit('changeSatisfaction', _activeRoom.satisfaction);

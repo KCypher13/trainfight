@@ -225,7 +225,7 @@ $(function () {
 socket.on('newAction', function (data) {
     room.actionInProgress[data.station.id] = data;
 
-    var _message = data.user+' a provoqué '+data.action.name+' à '+data.station.name;
+    var _message = data.user+' a provoqué '+data.action.notification+' à '+data.station.name;
     notification(_message);
     $('#'+data.station.id+' .buttonStation').addClass('animated pulse infinite '+data.action.class);
 });

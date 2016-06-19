@@ -210,6 +210,16 @@ $(function () {
     $('body').on('click', '.action', sendAction);
     $('body').on('click', '.reaction', sendReaction);
 
+    $(document).mouseup(function (e)
+    {
+        var container = $(".customMenu");
+
+        if (!container.is(e.target)
+            && container.has(e.target).length === 0)
+        {
+            closeMenu();
+        }
+    });
 
 
 

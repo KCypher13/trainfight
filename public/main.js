@@ -81,6 +81,7 @@ function sendReaction(){
     var _dialog = document.querySelector('dialog');
 
     if(!user.activeReaction.asRecovery){
+        _dialog.classList.remove('hide');
         _dialog.showModal();
     }
     else{
@@ -104,6 +105,7 @@ function sendAgents(){
 function closeDialog(){
     var _dialog = document.querySelector('dialog');
     _dialog.close();
+    _dialog.classList.add('hide');
 }
 
 function closeMenu(){

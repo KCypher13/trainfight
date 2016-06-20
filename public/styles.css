@@ -265,6 +265,11 @@ p i.material-icons{
     color: #2B3B8F;
     box-shadow: 0px 2px 7px #000;
 }
+.menuContent.reverse{
+    bottom:57px;
+    top:inherit;
+}
+
 .customMenu li{
     list-style: none;
     padding: 3px;
@@ -290,6 +295,9 @@ p i.material-icons{
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     -ms-transform: rotate(45deg);
+}
+.triangle.reverse{
+    top: -35%;
 }
 .customMenu .stationName{
     margin: 5px 0 0;

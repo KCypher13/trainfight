@@ -1,8 +1,5 @@
 var socket = io();
 
-var activeStation;
-var activeReaction;
-
 function checkUrl() {
     var _argPathname = window.location.pathname.substr(1).split('/');
 
@@ -79,15 +76,15 @@ function sendAction() {
 }
 
 function sendReaction(){
-    activeStation = $(this).data('station');;
-    activeReaction = room.reactions[$(this).data('id')];;
+    user.activeStation = $(this).data('station');;
+    user.activeReaction = room.reactions[$(this).data('id')];;
     var _dialog = document.querySelector('dialog');
 
-    if(!activeReaction.asRecovery){
+    if(!user.activeReaction.asRecovery){
         _dialog.showModal();
     }
     else{
-        socket.emit('createReaction', {'station': activeStation, 'reaction': activeReaction});
+        socket.emit('createReaction', {'station': user.activeStation, 'reaction': user.activeReaction});
     }
 
     closeMenu();
@@ -99,7 +96,7 @@ function sendAgents(){
         alert('Vous n\'avez pas assez d\'agents');
     }
     else{
-        socket.emit('createReaction', {'station': activeStation, 'reaction': activeReaction, 'nbAgents': _nbAgent});
+        socket.emit('createReaction', {'station': user.activeStation, 'reaction': user.activeReaction, 'nbAgents': _nbAgent});
     }
     closeDialog();
 }
@@ -130,6 +127,11 @@ function openMenu(){
     _html += "</ul></div></div>";
 
     closeMenu();
+
+    if($(this).parent().position().top>400){
+
+    }
+
     $(this).parent().append(_html);
 }
 

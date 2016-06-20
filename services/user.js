@@ -1,5 +1,7 @@
 module.exports = function(app){
     return {
+        activeStation:null,
+        activeReaction:null,
         setPseudo: function(data){
 
             var _room = (app.socket.io.sockets.adapter.rooms[this.activeRoom]) ? app.socket.io.sockets.adapter.rooms[this.activeRoom] : null;

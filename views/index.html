@@ -143,6 +143,18 @@
                         <div class="mdl-snackbar__text"></div>
                         <button class="mdl-snackbar__action" type="button"></button>
                     </div>
+                    <dialog class="mdl-dialog">
+                        <h4 class="mdl-dialog__title titleModal">Envoyer combien d'agent ?</h4>
+                        <div class="mdl-dialog__content">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="nbAgents">
+                            </div>
+                        </div>
+                        <div class="mdl-dialog__actions">
+                            <button type="button" class="mdl-button" onclick="sendAgents()">Envoyer</button>
+                            <button type="button" class="mdl-button" onclick="closeDialog()">Annuler</button>
+                        </div>
+                    </dialog>
                 </section>
                 <!-- -->
                 <section id="scoreEndGame" class="hide">

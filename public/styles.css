@@ -304,6 +304,9 @@ p i.material-icons{
     opacity: 0.3;
 }
 
+.titleModal{
+    font-size:1.5rem;
+}
 /*-------------------------------
 == #SCOREENDGAME
 -------------------------------*/

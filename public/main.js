@@ -1,5 +1,8 @@
 var socket = io();
 
+var activeStation;
+var activeReaction;
+
 function checkUrl() {
     var _argPathname = window.location.pathname.substr(1).split('/');
 
@@ -76,22 +79,34 @@ function sendAction() {
 }
 
 function sendReaction(){
-    var _station = $(this).data('station');
-    var _reaction = room.reactions[$(this).data('id')];
-    if(!_reaction.asRecovery){
-        var _nbAgent = prompt('combien d\'agent à envoyer ?');
-        if(_nbAgent > user.availableAgent){
-            alert('Vous n\'avez pas assez d\'agents');
-        }
-        else{
-            socket.emit('createReaction', {'station': _station, 'reaction': _reaction, 'nbAgents': _nbAgent});
-        }
+    activeStation = $(this).data('station');;
+    activeReaction = room.reactions[$(this).data('id')];;
+    var _dialog = document.querySelector('dialog');
+
+    if(!activeReaction.asRecovery){
+        _dialog.showModal();
     }
     else{
-        socket.emit('createReaction', {'station': _station, 'reaction': _reaction});
+        socket.emit('createReaction', {'station': activeStation, 'reaction': activeReaction});
     }
 
     closeMenu();
+}
+
+function sendAgents(){
+    var _nbAgent = $('#nbAgents').val();
+    if(_nbAgent > user.availableAgent){
+        alert('Vous n\'avez pas assez d\'agents');
+    }
+    else{
+        socket.emit('createReaction', {'station': activeStation, 'reaction': activeReaction, 'nbAgents': _nbAgent});
+    }
+    closeDialog();
+}
+
+function closeDialog(){
+    var _dialog = document.querySelector('dialog');
+    _dialog.close();
 }
 
 function closeMenu(){
